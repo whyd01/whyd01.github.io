@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naruto Collection - Elaina Chan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Gaya CSS */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .naruto-container {
+            animation: fadeIn 3s ease-out forwards;
+            transform: scale(1.02);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        a {
+            text-decoration: none;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 10px;
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+	    top: 0;
+	    position: sticky;
+	    z-index: 998;
+        }
+        .logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 16px;
+            object-fit: cover;
+        }
+        .search-bar {
+            border: 1px solid #e9e9e9;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            padding: 6px 8px;
+            background-color: transparent;
+            border-radius: 24px;
+            margin-right: 0.5rem;
+        }
+        .search-bar input {
+            border: none;
+            background: url('static/naruto/logo_akatsuki.png') left center no-repeat transparent;
+            background-size: 20px 20px;
+            outline: none;
+            flex-grow: 1;
+            font-size: 16px;
+            padding: 0 8px 0px 29px;
+            width: 50%;
+            height: 50%;
+            color: #333;
+        }
+        .search-icon img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+            align-items: center;
+        }
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .nav-buttons .btn {
+            padding: 12px 16px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 24px;
+            color: #333;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 8px;
+        }
+        .nav-buttons .btn.primary {
+            background-color: #e60023;
+            color: #fff;
+        }
+        .nav-buttons .btn.profile img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+        .nav-buttons .icon {
+            font-size: 24px;
+            color: #333;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .icon, .btn.primary, .btn.buat {
+            display: none;
+        }
+        .gallery-container {
+            padding: 16px;
+            columns: 2; 
+            column-gap: 16px;
+        }
+        .card {
+            display: block;
+            margin-bottom: 16px;
+            break-inside: avoid;
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+        .scrolling-nav-wrapper {
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+        .scroll-btn {
+            flex-shrink: 0; 
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .scroll-btn:hover {
+            background-color: #e0e0e0;
+        }
+        .scrolling-nav-container {
+            flex-grow: 1; 
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scrolling-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-btn.right {
+            right: 5px;
+            margin: 0 0 0 0;
+        }
+        .scrolling-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 5px;
+        }
+        .nav-item {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 10px;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        .nav-item.active {
+            background-color: blue;
+            color: white;
+        }
+        .nav-item.passife {
+            background-color: #06402B;
+            color: white;
+        }
+        .nav-item:hover {
+            background-color: #ddd;
+        }
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 5px;
+            transition: background-color 0.3s;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-item {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+        }
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+        .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 10px 0;
+        }
+        .dropdown-header {
+            margin: 5px 0;
+            padding: 0 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-list li {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .category-list li:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* CSS UNTUK OVERLAY TOMBOL-TOMBOL INTERAKTIF */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px;
+        }
+        .card:hover .overlay {
+            opacity: 1;
+        }
+        .overlay-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+        }
+        .save-btn {
+            background-color: #e60023;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .more-options {
+            display: flex;
+            gap: 5px;
+            position: relative; /* Tambah ini untuk menu dropdown */
+        }
+        .more-options-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: #fff;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 5px 0;
+            min-width: 150px;
+            z-index: 10;
+        }
+        .more-options-menu.show {
+            display: block;
+        }
+        .more-options-menu-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            text-align: left;
+            display: block;
+            color: #333;
+        }
+        .more-options-menu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .share-btn, .more-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .share-btn i, .more-btn i {
+            color: #333;
+            font-size: 16px;
+        }
+        .overlay-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .like-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border-radius: 20px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        .source-link {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        /* CSS Baru untuk Galeri Video */
+        .video-container {
+            padding: 16px;
+            columns: 2; /* Default untuk mobile */
+            column-gap: 16px;
+        }
+        .video-card {
+            display: block;
+            margin-bottom: 16px;
+            break-inside: avoid;
+            background-color: #222;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .video-card video {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+        /* Style untuk Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .dark-mode .header {
+            background-color: #1e1e1e;
+            box-shadow: 0 1px 2px rgba(255,255,255,0.1);
+        }
+        .dark-mode .search-bar {
+            background-color: #2a2a2a;
+            border: 1px solid #333;
+        }
+        .dark-mode .search-bar input {
+            background-color: none !important;
+            color: #e0e0e0;
+	    border: none !important;
+        }
+        .dark-mode .nav-buttons .btn, .dark-mode .nav-buttons .icon {
+            color: #e0e0e0;
+        }
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            box-shadow: 0 1px 2px rgba(255,255,255,0.1);
+        }
+        .dark-mode .scrolling-nav-list .nav-item {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+        .dark-mode .scrolling-nav-list .nav-item:hover {
+            background-color: #3a3a3a;
+        }
+        .dark-mode .dropdown-menu#profile-menu {
+            background-color: #1e1e1e;
+            box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+        }
+        .dark-mode .dropdown-item {
+            color: #e0e0e0;
+        }
+        .dark-mode .dropdown-item:hover {
+            background-color: #2a2a2a;
+        }
+        .dark-mode .dropdown-divider {
+            background-color: #333;
+        }
+        .dark-mode .dropdown-header {
+            color: #b0b0b0;
+        }
+        .dark-mode .scroll-btn {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+        }
+        .dark-mode .scroll-btn:hover {
+            background-color: #3a3a3a;
+        }
+        .dark-mode .more-options-menu {
+            background-color: #1e1e1e;
+        }
+        .dark-mode .more-options-menu-item  {
+            color: #e0e0e0;
+        }
+        .dark-mode .more-options-menu-item:hover, 
+        .dark-mode .category-list li:hover {
+            background-color: #2a2a2a;
+        }
+	.dark-mode #settings-modal > div,
+	.dark-mode #saved-gallery-modal > div,
+	.dark-mode #darkModeToggle > i, 
+	.dark-mode #close-modal-btn {
+            background-color: #1e1e1e !important; 
+       	}
+	.dark-mode label,
+	.dark-mode input,
+	.dark-mode button {
+    	    color: #e0e0e0; 
+	}
+
+	.dark-mode input[type="text"],
+	.dark-mode input[type="email"],
+	.dark-mode input[type="file"] {
+            background-color: #333; 
+            border: 1px solid #555; 
+	}
+
+	.dark-mode #save-profile-btn {
+    	     background-color: #b71c1c; 
+	}
+        @media (min-width: 600px) {
+            .gallery-container, .video-container {
+                columns: 3;
+            }
+            .search-bar {
+                width: 100%;
+            }
+            .icon, .btn.primary, .btn {
+                display: block;
+            }
+        }
+        @media (min-width: 900px) {
+            .gallery-container, .video-container {
+                columns: 4;
+            }
+        }
+        @media (min-width: 1200px) {
+            .gallery-container, .video-container {
+                columns: 5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="static/naruto/logo_akatsuki&.png" alt="Logo Akatsuki">
+        </a>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Naruto Search...">
+            <span class="search-icon" id="search-icon"><img src="static/images/poster/searchicon.png" alt="Search Icon"></span>
+            <div id="search-results" class="search-results"></div>
+        </div>
+        <div class="nav-buttons">
+            <a href="/" class="btn primary">Beranda</a>
+            <a href="#" class="btn buat">Buat</a>
+            <div class="dropdown-container">
+                <a href="#" class="btn profile" id="profile-btn">
+                    <img src="static/naruto/profileNaruto.jpg" alt="Profil">
+                </a>
+                <div id="profile-menu" class="dropdown-menu">
+                    <a href="#" class="dropdown-item" id="settings-btn">Pengaturan</a>
+                    <a href="auth" class="dropdown-item">Login</a>
+                    <a href="#" id="logout-btn" class="dropdown-item">Logout</a>
+                    <a href="#" class="dropdown-item social-login fb">Login Facebook</a>
+                    <a href="#" class="dropdown-item social-login ig">Login Instagram</a>
+                    <div class="dropdown-divider"></div>
+                    <h4 class="dropdown-header">Category</h4>
+                    <ul id="category-list" class="category-list"></ul>
+                </div>
+            </div>
+            <span class="icon" id="notification-btn">🔔</span>
+            <span class="icon" id="message-btn">💬</span>
+            <span class="icon" id="options-btn">...</span>
+        </div>
+    </header>
+    <main class="naruto-container">
+        <div class="scrolling-nav-wrapper">
+            <a class="scroll-btn left"> &lt; </a>
+            <div class="scrolling-nav-container">
+                <ul class="scrolling-nav-list text-list">
+                    <li class="nav-item active">Naruto</li>
+                    <li class="nav-item">Sasuke</li>
+                    <li class="nav-item">Hinata</li>
+                    <li class="nav-item">Cute</li>
+                    <li class="nav-item">Hanabi</li>
+                    <li class="nav-item">Akatsuki</li>
+                    <li class="nav-item">Oppai</li>
+                    <li class="nav-item">Hinata Dark</li>
+                    <li class="nav-item passife">Semua</li>
+                </ul>
+            </div>
+            <a class="scroll-btn right"> &gt; </a>
+        </div>
+        <div id="gallery-container" class="gallery-container"></div>
+        <div id="video-gallery-container" class="video-container"></div>
+    </main>
+
+<div id="saved-gallery-modal" style="display: none; position: fixed; top: 0; left: 0; margin-top: 1rem; width: 100%; height: 100vh; overflow-y: auto; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="background-color: #fff; padding: 20px; border-radius: 8px; width: 80%; max-width: 800px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+        <h2 style="text-align: center;">Koleksi Gambar</h2>
+        <div id="saved-gallery-container" class="gallery-container"></div>
+        <button id="close-gallery-modal-btn" style="position: absolute; top: 10px; right: 10px; font-size: 30px; background: none; color: red; border: none; cursor: pointer; zindex: 1001;">&times;</button>
+    </div>
+</div>
+
+
+    <div id="settings-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+        <div class="container-settings" style="background-color: #fff; padding: 20px; border-radius: 8px; width: 80%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <h2>Pengaturan</h2>
+            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fa fa-adjust" aria-hidden="true"></i></button>
+            <div style="margin-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-name" style="display: block; font-weight: bold; margin-bottom: 5px;">Nama</label>
+                    <input type="text" id="profile-name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-email" style="display: block; font-weight: bold; margin-bottom: 5px;">Email</label>
+                    <input type="email" id="profile-email" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-photo" style="display: block; font-weight: bold; margin-bottom: 5px;">Foto Profil</label>
+                    <input type="file" id="profile-photo" accept="image/*" style="width: 100%; padding: 8px;">
+                </div>
+                <button id="save-profile-btn" style="background-color: #e60023; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">Simpan</button>
+            </div>
+            <button id="close-modal-btn">Tutup</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsionalitas Navigasi (ikon)
+            const notificationBtn = document.getElementById('notification-btn');
+            const messageBtn = document.getElementById('message-btn');
+            const optionsBtn = document.getElementById('options-btn');
+            
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', function() { alert('Tampilkan notifikasi!'); });
+            }
+            if (messageBtn) {
+                messageBtn.addEventListener('click', function() { alert('Tampilkan pesan!'); });
+            }
+            if (optionsBtn) {
+                optionsBtn.addEventListener('click', function() { alert('Tampilkan menu opsi!'); });
+            }
+            
+            // Fungsionalitas Dropdown
+            const profileBtn = document.getElementById('profile-btn');
+            const profileMenu = document.getElementById('profile-menu');
+            const categoryList = document.getElementById('category-list');
+            
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileMenu.classList.toggle('show');
+                    loadCategories();
+                });
+            }
+            window.addEventListener('click', function(event) {
+                if (profileMenu && !event.target.closest('.dropdown-container')) {
+                    profileMenu.classList.remove('show');
+                }
+            });
+            function loadCategories() {
+                fetch('static/categories.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Gagal memuat kategori');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        categoryList.innerHTML = '';
+                        data.categories.forEach(category => {
+                            const li = document.createElement('li');
+                            li.textContent = category.name;
+                            categoryList.appendChild(li);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Gagal memuat kategori:", error);
+                    });
+            }
+            // Fungsionalitas Pencarian
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            
+            let allContent = [];
+            Promise.all([
+                fetch('static/songs.json').then(res => res.json()).catch(() => ({})),
+                fetch('static/images.json').then(res => res.json()).catch(() => ({})),
+                fetch('static/videos.json').then(res => res.json()).catch(() => ({}))
+            ]).then(data => {
+                const songsData = data[0];
+                const imagesData = data[1];
+                const videosData = data[2];
+                allContent = [
+                    ...(songsData.anime_songs || []),
+                    ...(songsData.mixed_album_songs || []),
+                    ...(imagesData.images || []),
+                    ...(videosData.videos || [])
+                ];
+                searchInput.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase().trim();
+                    if (query.length > 0) {
+                        searchAllContent(query);
+                        searchResults.classList.add('visible');
+                    } else {
+                        searchResults.innerHTML = '';
+                        searchResults.classList.remove('visible');
+                    }
+                });
+                function searchAllContent(query) {
+                    searchResults.innerHTML = '';
+                    const filteredResults = allContent.filter(item => {
+                        const searchableText = `${item.title || ''} ${item.artist || ''} ${item.category || ''}`.toLowerCase();
+                        return searchableText.includes(query);
+                    });
+                    if (filteredResults.length === 0) {
+                        searchResults.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
+                        return;
+                    }
+                    filteredResults.forEach(item => {
+                        const resultItem = document.createElement('a');
+                        resultItem.href = item.href || '/';
+                        resultItem.classList.add('search-result-item');
+                        const title = item.title || item.category || 'Konten';
+                        const subtitle = item.artist ? `Oleh: ${item.artist}` : item.category ? `Kategori: ${item.category}` : '';
+                        resultItem.innerHTML = `<strong>${title}</strong><br><small>${subtitle}</small>`;
+                        searchResults.appendChild(resultItem);
+                    });
+                }
+            });
+            // Fungsionalitas Galeri Gambar
+            const galleryContainer = document.getElementById('gallery-container');
+            const navItems = document.querySelectorAll('.scrolling-nav-container .nav-item');
+            let allImages = [];
+            fetch('static/images.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Gagal memuat data gambar');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allImages = data.images;
+                    displayImages(allImages);
+                })
+                .catch(error => {
+                    console.error('Ada masalah dengan fetch operation:', error);
+                    galleryContainer.innerHTML = '<p>Gagal memuat galeri. Silakan coba lagi nanti.</p>';
+                });
+            function displayImages(imagesToDisplay) {
+                galleryContainer.innerHTML = '';
+                imagesToDisplay.forEach(image => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.id = image.id;
+                    const img = document.createElement('img');
+                    img.src = image.src;
+                    img.alt = image.title;
+                    card.appendChild(img);
+                    // MEMBUAT OVERLAY DAN TOMBOL INTERAKTIF
+                    const overlay = document.createElement('div');
+                    overlay.classList.add('overlay');
+                    const overlayButtons = document.createElement('div');
+                    overlayButtons.classList.add('overlay-buttons');
+                    const saveBtn = document.createElement('button');
+                    saveBtn.classList.add('save-btn');
+                    saveBtn.textContent = 'Simpan';
+                    overlayButtons.appendChild(saveBtn);
+                    const moreOptions = document.createElement('div');
+                    moreOptions.classList.add('more-options');
+                    const shareBtn = document.createElement('button');
+                    shareBtn.classList.add('share-btn');
+                    shareBtn.innerHTML = '<i class="fas fa-share-alt"></i>';
+                    moreOptions.appendChild(shareBtn);
+                    const moreBtn = document.createElement('button');
+                    moreBtn.classList.add('more-btn');
+                    moreBtn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+                    moreOptions.appendChild(moreBtn);
+                    const moreOptionsMenu = document.createElement('div');
+                    moreOptionsMenu.classList.add('more-options-menu');
+                    moreOptionsMenu.innerHTML = `
+                        <span class="more-options-menu-item" data-action="hide">Sembunyikan Pin</span>
+                        <span class="more-options-menu-item" data-action="report">Laporkan Pin</span>
+                        <span class="more-options-menu-item" data-action="delete">Hapus dari Koleksi</span>
+                    `;
+                    moreOptions.appendChild(moreOptionsMenu);
+                    overlayButtons.appendChild(moreOptions);
+                    overlay.appendChild(overlayButtons);
+                    const overlayFooter = document.createElement('div');
+                    overlayFooter.classList.add('overlay-footer');
+                    const likeContainer = document.createElement('div');
+                    likeContainer.classList.add('like-container');
+                    
+                    // Ambil jumlah like dari localStorage atau gunakan jumlah awal dari JSON
+                    const savedLikes = localStorage.getItem('likes_' + image.id);
+                    const initialLikes = savedLikes ? parseInt(savedLikes) : (image.likes || 0);
+                    likeContainer.innerHTML = `<i class="fas fa-heart like-icon"></i><span class="like-count">${initialLikes}</span>`;
+                    
+                    overlayFooter.appendChild(likeContainer);
+                    const sourceLink = document.createElement('a');
+                    sourceLink.classList.add('source-link');
+                    sourceLink.href = image.href || '#';
+                    sourceLink.target = '_blank';
+                    sourceLink.innerHTML = '<i class="fas fa-external-link-alt"></i>';
+                    overlayFooter.appendChild(sourceLink);
+                    overlay.appendChild(overlayFooter);
+                    card.appendChild(overlay);
+                    // Menambahkan event listener ke tombol
+                    likeContainer.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        let likeCountElement = likeContainer.querySelector('.like-count');
+                        let currentLikes = parseInt(likeCountElement.textContent) || 0;
+                        currentLikes++;
+                        likeCountElement.textContent = currentLikes;
+                        
+                        // Simpan jumlah like yang baru ke localStorage
+                        localStorage.setItem('likes_' + image.id, currentLikes);
+                        
+                        alert(`Kamu menyukai ${image.title}!`);
+                    });
+                    saveBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // Simpan ID dan URL gambar ke localStorage
+                        let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                        const imageToSave = {
+                            id: image.id,
+                            src: image.src,
+                            title: image.title
+                        };
+                        // Cek apakah gambar sudah disimpan
+                        const isAlreadySaved = savedImages.some(item => item.id === image.id);
+                        if (!isAlreadySaved) {
+                            savedImages.push(imageToSave);
+                            localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                            alert(`Gambar ${image.title} berhasil disimpan!`);
+                        } else {
+                            alert(`Gambar ${image.title} sudah pernah kamu simpan!`);
+                        }
+                    });
+                    shareBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (navigator.share) {
+                            navigator.share({
+                                title: image.title,
+                                text: 'Lihat gambar Naruto ini!',
+                                url: image.src,
+                            }).then(() => {
+                                console.log('Berhasil berbagi!');
+                            }).catch((error) => {
+                                console.error('Gagal berbagi:', error);
+                            });
+                        } else {
+                            alert(`Tidak dapat berbagi melalui perangkat ini. Kamu membagikan ${image.title}!`);
+                        }
+                    });
+                    moreBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // Tutup semua menu yang lain
+                        document.querySelectorAll('.more-options-menu.show').forEach(menu => {
+                            if (menu !== moreOptionsMenu) {
+                                menu.classList.remove('show');
+                            }
+                        });
+                        moreOptionsMenu.classList.toggle('show');
+                    });
+                    moreOptionsMenu.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const action = e.target.getAttribute('data-action');
+                        if (action === 'hide') {
+                            alert(`Menyembunyikan Pin ${image.title}.`);
+                            card.style.display = 'none';
+                        } else if (action === 'report') {
+                            alert(`Melaporkan Pin ${image.title}.`);
+                        } else if (action === 'delete') {
+                             let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                             savedImages = savedImages.filter(item => item.id !== image.id);
+                             localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                             alert(`Menghapus ${image.title} dari koleksi.`);
+                        }
+                        moreOptionsMenu.classList.remove('show');
+                    });
+                    // Sembunyikan menu jika mengklik di luar
+                    window.addEventListener('click', (e) => {
+                        if (!e.target.closest('.more-options')) {
+                            moreOptionsMenu.classList.remove('show');
+                        }
+                    });
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('.overlay')) {
+                            alert(`Kamu mengklik card ${image.title}!`);
+                        }
+                    });
+                    galleryContainer.appendChild(card);
+                });
+            }
+            // Fungsionalitas Filter Kategori
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.textContent.toLowerCase();
+                    navItems.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    let filteredImages = [];
+                    if (category === 'semua') {
+                        filteredImages = allImages;
+                    } else {
+                        filteredImages = allImages.filter(image => image.category.toLowerCase() === category);
+                    }
+                    displayImages(filteredImages);
+                });
+            });
+            // Fungsionalitas Galeri Video
+            const videoGalleryContainer = document.getElementById('video-gallery-container');
+            fetch('static/videos.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Gagal memuat data video');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.videos.forEach(video => {
+                        const card = document.createElement('div');
+                        card.classList.add('video-card');
+                        const videoElement = document.createElement('video');
+                        videoElement.src = video.src;
+                        videoElement.controls = true;
+                        const title = document.createElement('h4');
+                        title.textContent = video.title;
+                        card.appendChild(videoElement);
+                        card.appendChild(title);
+                        videoGalleryContainer.appendChild(card);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ada masalah dengan fetch operation:', error);
+                    videoGalleryContainer.innerHTML = '<p>Gagal memuat galeri video. Silakan coba lagi nanti.</p>';
+                });
+            // Fungsionalitas Scrolling Nav
+            const scrollingNavContainer = document.querySelector('.scrolling-nav-container');
+            const leftScrollBtn = document.querySelector('.scroll-btn.left');
+            const rightScrollBtn = document.querySelector('.scroll-btn.right');
+            if (leftScrollBtn) {
+                leftScrollBtn.addEventListener('click', () => {
+                    scrollingNavContainer.scrollBy({
+                        left: -200,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            if (rightScrollBtn) {
+                rightScrollBtn.addEventListener('click', () => {
+                    scrollingNavContainer.scrollBy({
+                        left: 200,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            // Fungsionalitas Login
+            const loginFacebookBtn = document.querySelector('.dropdown-item.social-login.fb');
+            const loginInstagramBtn = document.querySelector('.dropdown-item.social-login.ig');
+            if (loginFacebookBtn) {
+                loginFacebookBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Login Facebook Dulu Gan');
+                    window.location.href = 'https://www.facebook.com/accounts/login/';
+                    console.log('Fungsi login Facebook dipicu');
+                });
+            }
+            if (loginInstagramBtn) {
+                loginInstagramBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert ('Login Ig Bosskuu');
+                    window.location.href = 'https://www.instagram.com/accounts/login/';
+                    console.log('Fungsi login Instagram dipicu');
+                });
+            }
+            // Fungsionalitas Pengaturan dan Edit Profil
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsModal = document.getElementById('settings-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const profileNameInput = document.getElementById('profile-name');
+            const profileEmailInput = document.getElementById('profile-email');
+            const profilePhotoInput = document.getElementById('profile-photo');
+            const saveProfileBtn = document.getElementById('save-profile-btn');
+            const profileImg = document.querySelector('.btn.profile img');
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    settingsModal.style.display = 'flex';
+                });
+            }
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', function() {
+                    settingsModal.style.display = 'none';
+                });
+            }
+            if (saveProfileBtn) {
+                saveProfileBtn.addEventListener('click', function() {
+                    const name = profileNameInput.value;
+                    const email = profileEmailInput.value;
+                    localStorage.setItem('profileName', name);
+                    localStorage.setItem('profileEmail', email);
+                    if (profilePhotoInput.files.length > 0) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const photoDataUrl = e.target.result;
+                            localStorage.setItem('profilePhoto', photoDataUrl);
+                            profileImg.src = photoDataUrl;
+                            alert('Profil berhasil diperbarui!');
+                        };
+                        reader.readAsDataURL(profilePhotoInput.files[0]);
+                    } else {
+                        alert('Profil berhasil diperbarui!');
+                    }
+                });
+            }
+            // Fungsionalitas Logout
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                 logoutBtn.addEventListener('click', function(e) {
+                     e.preventDefault();
+                     localStorage.clear();
+                     alert('Anda telah berhasil logout.');
+                     window.location.href = '/';
+                 });
+            }
+            // Fungsionalitas Dark Mode
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            // Cek apakah dark mode sudah aktif dari sesi sebelumnya
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            }
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                // Simpan preferensi dark mode ke localStorage
+                localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            });
+        });
+    </script>
+<script src="static/js/narutosavedgallery.js"></script>
+</body>
+</html>
