@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "name": "Shounen",
+      "href": "#",
+      "src": "static/naruto/Hinata Hyuga.jpeg"
+    },
+    {
+      "name": "Seinen",
+      "href": "#",
+      "src": "static/naruto/Hinata Hyuga.jpeg"
+    },
+    {
+      "name": "Slice Of Life",
+      "href": "#",
+      "src": "static/naruto/Hinata Hyuga.jpeg"
+    },
+    {
+      "name": "Isekai",
+      "href": "#",
+      "src": "static/naruto/Hinata Hyuga.jpeg"
+    },
+    {
+      "name": "Action",
+      "href": "#",
+      "src": "static/naruto/Hinata Hyuga.jpeg"
+    }
+  ]
+}
