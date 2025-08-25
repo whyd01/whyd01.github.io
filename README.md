@@ -1,2 +1,2 @@
-# whyd1.github.io
+# Naruto No Die
 Pecinta Naruto
