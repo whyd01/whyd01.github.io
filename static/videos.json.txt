@@ -1,0 +1,76 @@
+{
+  "videos": [
+    {
+      "id": "Naruto Vs Sasuke Final Battle",
+      "title": "Naruto Vs Sasuke Final Battle",
+      "category": "naruto vs sasuke",
+      "href": "#",
+      "src": "static/videos/Naruto Vs Sasuke Final Battle.mp4",
+      "likes": 1030
+   },
+   {
+      "id": "Sasuke Epic Momment 🥶🥶",
+      "title": "Sasuke Epic Momment 🥶🥶",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/🥶🥶.mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Mv [Naruto Vs Sassuke]",
+      "title": "Mv [Naruto Vs Sassuke]",
+      "category": "naruto vs sasuke",
+      "href": "#",
+      "src": "static/videos/Mv [Naruto Vs Sassuke].mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Naruto crazy fire fights",
+      "title": "Naruto crazy fire fights",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/Naruto crazy fire fights.mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Kagebushino Jutshu🫸🏻",
+      "title": "Kagebushino Jutshu🫸🏻",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/Kagebushin No Jutshu🫸🏻.mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Mamang Saskehh😎",
+      "title": "Mamang Saskehh😎",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/Mamang Saskehh😎.mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Mamang Saskehh😎",
+      "title": "Mamang Saskehh😎",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/Mamang Saskehh😎.mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Mv[Naruto Vs Sasuke☠️]",
+      "title": "Mv[Naruto Vs Sasuke☠️]",
+      "category": "naruto vs sasuke",
+      "href": "#",
+      "src": "static/videos/Mv[Naruto Vs Sasuke☠️].mp4",
+      "likes": 1030
+   },
+    {
+      "id": "Sassskeehh",
+      "title": "Sasuke Prime",
+      "category": "Shorts",
+      "href": "#",
+      "src": "static/videos/Sasuke Prime.mp4",
+      "likes": 1030
+   }
+  ]
+}
