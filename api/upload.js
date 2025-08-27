@@ -82,7 +82,7 @@ export default async function handler(req, res) {
       return res.status(response.status).json({ error: 'Failed to upload to Dropbox', details: errorText });
     }
   } catch (error) {
-    console.error('Error during upload to Dropbox:', error);
+    console.error('Error during upload:', error);
     return res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 }
