@@ -1,29 +1,11 @@
 import { Buffer } from 'buffer';
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+import { IncomingForm } from 'formidable';
 
-// Fungsi pembantu untuk mengurai FormData
-const parseMultipartFormData = (body, boundary) => {
-  const parts = body.split(`--${boundary}`).slice(1, -1);
-  const result = {};
-  parts.forEach(part => {
-    const [headers, content] = part.split('\r\n\r\n');
-    const nameMatch = /name="([^"]+)"/.exec(headers);
-    if (nameMatch) {
-      const name = nameMatch[1];
-      if (name === 'file') {
-        const fileContent = content.trim();
-        const contentTypeMatch = /Content-Type: ([^\r\n]+)/.exec(headers);
-        const contentType = contentTypeMatch ? contentTypeMatch[1] : 'application/octet-stream';
-        result.file = {
-          data: fileContent,
-          contentType: contentType
-        };
-      } else {
-        result[name] = content.trim();
-      }
-    }
-  });
-  return result;
+export const config = {
+  api: {
+    bodyParser: false,
+  },
 };
 
 export default async function handler(req, res) {
@@ -31,36 +13,30 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // Dapatkan boundary dari header
-  const contentType = req.headers['content-type'];
-  const boundaryMatch = /boundary=([^;]+)/.exec(contentType);
-  if (!boundaryMatch) {
-    return res.status(400).json({ error: 'Boundary not found in Content-Type' });
-  }
-  const boundary = boundaryMatch[1];
-
-  // Baca body request sebagai buffer
-  const bodyBuffer = await new Promise((resolve) => {
-    const chunks = [];
-    req.on('data', chunk => chunks.push(chunk));
-    req.on('end', () => resolve(Buffer.concat(chunks)));
-  });
-
-  const parsedData = parseMultipartFormData(bodyBuffer.toString(), boundary);
-  const { file, title, category } = parsedData;
-  const accessToken = process.env.DROPBOX_ACCESS_TOKEN;
-
-  if (!accessToken) {
-    return res.status(500).json({ error: 'Dropbox access token is not set' });
-  }
-  if (!file) {
-    return res.status(400).json({ error: 'File is required' });
-  }
-
-  const filename = `/${category || 'general'}/${Date.now()}_${title || 'untitled'}.jpeg`;
-  const imageBuffer = Buffer.from(file.data, 'binary');
-
+  const form = new IncomingForm();
+  
   try {
+    const [fields, files] = await form.parse(req);
+
+    const title = fields.title?.[0] || 'untitled';
+    const category = fields.category?.[0] || 'general';
+    const file = files.file?.[0];
+
+    if (!file) {
+      return res.status(400).json({ error: 'File is required' });
+    }
+
+    const accessToken = process.env.DROPBOX_ACCESS_TOKEN;
+    if (!accessToken) {
+      return res.status(500).json({ error: 'Dropbox access token is not set' });
+    }
+
+    const filename = `/${category}/${Date.now()}_${title}.jpeg`;
+    const fileBuffer = await new Promise((resolve, reject) => {
+      const chunks = [];
+      file.on('data', chunk => chunks.push(chunk)).on('end', () => resolve(Buffer.concat(chunks))).on('error', reject);
+    });
+
     const response = await fetch('https://content.dropboxapi.com/2/files/upload', {
       method: 'POST',
       headers: {
@@ -73,16 +49,37 @@ export default async function handler(req, res) {
           mute: false
         })
       },
-      body: imageBuffer,
+      body: fileBuffer,
     });
 
     if (response.ok) {
       const data = await response.json();
-      const url = `https://www.dropbox.com/s${data.path_display}?raw=1`;
-      return res.status(200).json({ message: 'Upload successful', url: url });
+      const shareUrlResponse = await fetch('https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          path: data.path_display,
+          settings: {
+            requested_visibility: "public"
+          }
+        })
+      });
+
+      if (shareUrlResponse.ok) {
+        const shareData = await shareUrlResponse.json();
+        const rawUrl = shareData.url.replace('dl=0', 'raw=1');
+        return res.status(200).json({ message: 'Upload successful', url: rawUrl });
+      } else {
+        const shareErrorText = await shareUrlResponse.text();
+        return res.status(shareUrlResponse.status).json({ error: 'Failed to create shared link', details: shareErrorText });
+      }
+
     } else {
-      const errorData = await response.text();
-      return res.status(response.status).json({ error: 'Failed to upload to Dropbox', details: errorData });
+      const errorText = await response.text();
+      return res.status(response.status).json({ error: 'Failed to upload to Dropbox', details: errorText });
     }
   } catch (error) {
     console.error('Error during upload to Dropbox:', error);
