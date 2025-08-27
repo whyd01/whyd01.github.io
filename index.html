@@ -1300,7 +1300,7 @@
                 uploadModal.style.display = 'none';
             });
             
-            // KODE INI YANG SUDAH DIPERBAIKI
+            // Kode JavaScript yang sudah diperbaiki
             uploadForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -1309,47 +1309,35 @@
                 const categoryInput = document.getElementById('categoryInput');
 
                 const file = fileInput.files[0];
-                const title = titleInput.value;
-                const category = categoryInput.value;
 
                 if (!file) {
-                    alert('Pilih file gambar terlebih dahulu.');
+                    alert('Tolong pilih file terlebih dahulu!');
                     return;
                 }
                 
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('title', titleInput.value);
+                formData.append('category', categoryInput.value);
 
-                reader.onload = async () => {
-                    const base64Image = reader.result.split(',')[1];
-                    
-                    try {
-                        const response = await fetch('/api/upload', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ image: base64Image, title: title, category: category }),
-                        });
+                try {
+                    const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
 
-                        const result = await response.json();
-
-                        if (response.ok) {
-                            alert('Gambar berhasil diunggah!');
-                            uploadModal.style.display = 'none';
-                            uploadForm.reset();
-                        } else {
-                            alert('Gagal mengunggah gambar. Silakan coba lagi. ' + result.error);
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        alert('Terjadi kesalahan. Coba lagi nanti.');
+                    if (response.ok) {
+                        alert('Gambar berhasil diunggah!');
+                        uploadModal.style.display = 'none';
+                        uploadForm.reset();
+                    } else {
+                        const errorData = await response.json();
+                        alert('Gagal mengunggah gambar: ' + errorData.error);
                     }
-                };
-                reader.onerror = (error) => {
-                    console.error('Error membaca file:', error);
-                    alert('Gagal membaca file.');
-                };
+                } catch (error) {
+                    console.error('Ada masalah dengan unggahan:', error);
+                    alert('Gagal mengunggah gambar. Silakan coba lagi.');
+                }
             });
             
             // Fungsionalitas untuk tombol Koleksi yang baru
@@ -1365,3 +1353,4 @@
     </script>
 </body>
 </html>
+
