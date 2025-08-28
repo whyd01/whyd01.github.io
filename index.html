@@ -9,7 +9,7 @@
     <title>Whyd1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Base Styles - GitHub Light Mode */
+        /* Base Styles - Light Mode */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             background-color: #f6f8fa;
@@ -195,13 +195,20 @@
             background-color: #d1d5da;
         }
 
-        .nav-item.active,
+        .nav-item.active {
+            background-color: green;
+            color: white;
+            font-weight: 600;
+        }
         .nav-item.passife {
             background-color: #0366d6;
             color: #fff;
             font-weight: 600;
         }
-
+        .btn.primary {
+            display: none;
+            
+        }
         .gallery-container,
         .video-container {
             columns: 2;
@@ -751,6 +758,9 @@
             .gallery-container, .video-container {
                 columns: 3;
             }
+            .btn.primary {
+                display: block;
+            }
         }
         
         @media (min-width: 900px) {
@@ -777,7 +787,7 @@
             <div id="search-results" class="search-results"></div>
         </div>
         <div class="nav-buttons">
-            <a href="musik.html" class="btn"><img src="static/images/music.png" style="width: 20px; height: 20px; border-radius: 50%;" alt="Musik"></a>
+            <a href="musik.html" class="btn primary"><img src="static/images/music.png" style="width: 20px; height: 20px; border-radius: 50%;" alt="Musik"></a>
             <div class="dropdown-container">
                 <a href="#" class="btn profile" id="profile-btn">
                     <img src="static/images/profile.png" alt="Profil">
