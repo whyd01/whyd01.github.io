@@ -35,7 +35,7 @@ loginBtn.addEventListener('click', (e) => {
             const user = userCredential.user;
             messageElement.textContent = `Login berhasil! Selamat datang, ${user.email}.`;
             console.log("Pengguna berhasil login:", user);
-            window.location.href = "/";
+            window.location.href = "index.html";
         })
         .catch((error) => {
             const errorMessage = error.message;
