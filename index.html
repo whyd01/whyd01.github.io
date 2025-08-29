@@ -880,7 +880,7 @@
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
     <header class="header">
         <a href="musik" class="logo">
             <img src="static/images/logo_akatsuki&.png" alt="Logo Akatsuki">
@@ -1068,7 +1068,7 @@
                 overlay.addEventListener('click', (e) => {
                     // Cek apakah target klik BUKAN tombol-tombol di dalamnya
                     if (e.target.tagName.toLowerCase() !== 'button' && e.target.tagName.toLowerCase() !== 'i' && !e.target.closest('.more-options-menu')) {
-                        window.location.href = `second?src=${encodeURIComponent(image.src)}`;
+                        window.location.href = `second.htmlp?src=${encodeURIComponent(image.src)}`;
                     }
                 });
                 
@@ -1169,7 +1169,7 @@
                             // Gabungkan dengan origin (http://localhost:4000)
                             const fullUrl = window.location.origin + imageSrc.replace(window.location.origin, '');
                     
-                            // Lakukan pengkodean URI yang benar, hanya sekali
+                            p
                             const encodedUrl = encodeURI(fullUrl);
                             
                             navigator.clipboard.writeText(encodedUrl).then(() => {
@@ -1253,7 +1253,7 @@
                 videoElement.addEventListener('click', (e) => {
                     // Ini video, jadi kita bisa langsung aja mencegah default behavior
                     e.preventDefault(); 
-                    window.location.href = `second?src=${encodeURIComponent(video.src)}`;
+                    window.location.href = `second.html?src=${encodeURIComponent(video.src)}`;
                 });
                 card.appendChild(videoElement);
 
@@ -1279,7 +1279,7 @@
 
             filteredResults.forEach(item => {
                 const itemLink = document.createElement('a');
-                itemLink.href = `second?src=${encodeURIComponent(item.src)}`;
+                itemLink.href = `second.html?src=${encodeURIComponent(item.src)}`;
                 itemLink.classList.add('search-result-item');
                 
                 // Langsung membuat dan menambahkan elemen media tanpa lapisan div preview
