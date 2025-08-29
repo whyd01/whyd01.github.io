@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Koleksi Gambar Dan Video Naruto">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="static/images/logo_head.png">
+    <title>Whyd1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Base Styles - Light Mode */
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #f6f8fa;
+            color: #24292e;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+
+        /* Header & Navigation */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background-color: #fff;
+            border-bottom: 1px solid #e1e4e8;
+            position: sticky;
+            top: 0;
+            z-index: 998;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            padding: 6px 10px;
+            background-color: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin: 0 16px;
+            position: relative;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            background: transparent;
+            flex-grow: 1;
+            font-size: 14px;
+            padding: 0 0 0 8px;
+            color: #24292e;
+        }
+
+        .search-bar input::placeholder {
+            color: #6a737d;
+        }
+
+        .search-icon img {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-buttons .btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #24292e;
+            border-radius: 6px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-buttons .btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .btn.profile img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-left: 8px;
+            cursor: pointer;
+            color: #24292e;
+        }
+        
+        /* Content & Gallery */
+        .naruto-container {
+            padding: 16px;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .scrolling-nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .scroll-btn {
+            flex-shrink: 0;
+            background-color: #e0e0e0;
+            border: 1px solid #e1e4e8;
+            border-radius: 10px;
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #586069;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .scroll-btn:hover {
+            background-color: #f6f8fa;
+        }
+        
+        .scrolling-nav-container {
+            flex-grow: 1;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .scrolling-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrolling-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-item {
+            background-color: #e1e4e8;
+            color: #586069;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            flex-shrink: 0;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: #d1d5da;
+            border: 1px solid blue;
+        }
+
+        .nav-item.active {
+            background-color: #0366d6;
+            color: #fff;
+            font-weight: 600;
+        }
+        .nav-item.passife {
+            background-color: #008000;
+            color: #fff;
+            font-weight: 600;
+        }
+        .nav-item.passife:hover {
+            border: 1px solid #e0e0e0;
+        }
+        .btn.primary {
+            display: none;
+        }
+        .gallery-container,
+        .video-container {
+            columns: 2;
+            column-gap: 16px;
+        }
+
+        .card, .video-card {
+            display: block;
+            margin-bottom: 16px;
+            break-inside: avoid;
+            background-color: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(27, 31, 35, 0.1);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover, .video-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(27, 31, 35, 0.15);
+        }
+
+        .card img, .video-card video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-card video {
+            border-radius: 6px;
+        }
+        
+        /* Dropdown & Modals */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            min-width: 200px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(27, 31, 35, 0.1);
+            margin-top: 8px;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #24292e;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f6f8fa;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #e1e4e8;
+            margin: 8px 0;
+        }
+
+        .dropdown-header {
+            padding: 4px 16px;
+            font-size: 12px;
+            color: #6a737d;
+            text-transform: uppercase;
+        }
+        
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-list li {
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #24292e;
+        }
+        
+        .category-list li:hover {
+            background-color: #f6f8fa;
+        }
+
+        /* Overlay & Interactive Buttons */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .overlay-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 8px;
+            gap: 8px;
+        }
+
+        .save-btn {
+            background-color: red;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.2s;
+        }
+        
+        .save-btn:hover {
+            background-color: #288e44;
+        }
+
+        .share-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .share-btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .share-btn i {
+            color: #24292e;
+            font-size: 14px;
+        }
+
+        /* PERBAIKAN: Posisi dan styling untuk tombol dan menu '...' */
+        .more-options-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .more-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .more-btn:hover {
+            background-color: #e8e8e8;
+        }
+
+        .more-btn i {
+            color: #24292e;
+            font-size: 14px;
+        }
+        
+        .more-options-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(27, 31, 35, 0.1);
+            padding: 8px 0;
+            min-width: 150px;
+            z-index: 10;
+        }
+        
+        .more-options-menu.show {
+            display: block;
+        }
+        
+        .more-options-menu-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #24292e;
+            transition: background-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .more-options-menu-item:hover {
+            background-color: #f6f8fa;
+        }
+        
+        .overlay-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .like-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border-radius: 20px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .like-icon.liked {
+            color: #ff3366;
+        }
+
+        .source-link {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        /* Modals & Forms */
+        #settings-modal, #saved-gallery-modal, #upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            position: relative;
+            height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 24px;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 8px;
+        }
+
+        .settings-section {
+            margin-bottom: 24px;
+            padding: 16px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        
+        .settings-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #24292e;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 8px;
+        }
+
+        .settings-section label {
+            font-size: 14px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .settings-section input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5da;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #24292e;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .settings-section input:focus {
+            outline: none;
+            border-color: #0366d6;
+        }
+        
+        .settings-section button {
+            background-color: #2ea44f;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        
+        .settings-section button:hover {
+            background-color: #288e44;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #586069;
+        }
+        
+        .message-list, .notification-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .message-item, .notification-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e1e4e8;
+            font-size: 14px;
+        }
+        
+        .message-item:last-child, .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #010409;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .header {
+            background-color: #0d1117;
+            border-bottom-color: #30363d;
+        }
+
+        .dark-mode .search-bar {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        .dark-mode .search-bar input {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .search-bar input::placeholder {
+            color: #8b949e;
+        }
+
+        .dark-mode .nav-buttons .btn,
+        .dark-mode .icon {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .nav-buttons .btn:hover {
+            background-color: #30363d;
+        }
+
+        .dark-mode .scroll-btn {
+            background-color: #0d1117;
+            border-color: #30363d;
+            color: #8b949e;
+        }
+
+        .dark-mode .scroll-btn:hover {
+            background-color: #161b22;
+        }
+
+        .dark-mode .scrolling-nav-list .nav-item {
+            background-color: #30363d;
+            color: #8b949e;
+        }
+        
+        .dark-mode .scrolling-nav-list .nav-item:hover {
+            background-color: #444c56;
+        }
+
+        .dark-mode .nav-item.active,
+        .dark-mode .nav-item.passife {
+            background-color: #0366d6;
+            color: #fff;
+        }
+
+        .dark-mode .card,
+        .dark-mode .video-card {
+            background-color: #0d1117;
+            border-color: #30363d;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .card:hover,
+        .dark-mode .video-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .dropdown-menu {
+            background-color: #0d1117;
+            border-color: #30363d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .dropdown-item,
+        .dark-mode .category-list li {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .dropdown-item:hover,
+        .dark-mode .category-list li:hover {
+            background-color: #161b22;
+        }
+        
+        .dark-mode .dropdown-divider {
+            background-color: #30363d;
+        }
+        
+        .dark-mode .dropdown-header {
+            color: #8b949e;
+        }
+
+        .dark-mode .more-options-menu {
+            background-color: #0d1117;
+            border-color: #30363d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode .more-options-menu-item {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .more-options-menu-item:hover {
+            background-color: #161b22;
+        }
+
+        .dark-mode .save-btn {
+            background-color: #2ea44f;
+        }
+
+        .dark-mode .save-btn:hover {
+            background-color: #288e44;
+        }
+
+        .dark-mode .share-btn,
+        .dark-mode .more-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .share-btn:hover,
+        .dark-mode .more-btn:hover {
+            background-color: #30363d;
+        }
+
+        .dark-mode .share-btn i,
+        .dark-mode .more-btn i {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #0d1117;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        .dark-mode .modal-content h2 {
+            color: #e0e0e0;
+            border-bottom-color: #30363d;
+        }
+
+        .dark-mode .settings-section {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        .dark-mode .settings-section h3,
+        .dark-mode .settings-section label {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .settings-section input {
+            background-color: #0d1117;
+            border-color: #30363d;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .settings-section input:focus {
+            border-color: #0366d6;
+        }
+
+        .dark-mode .message-item, .dark-mode .notification-item {
+            border-bottom-color: #30363d;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .close-modal-btn {
+            color: #8b949e;
+        }
+        h7 { 
+            display: none; 
+        }
+        /* CSS untuk Search Result Overlay */
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 400px;
+            background-color: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            overflow-y: auto;
+            padding: 8px 0;
+            transition: all 0.2s ease-in-out;
+        }
+        .search-results.visible {
+            display: block;
+        }
+
+        .dark-mode .search-results {
+            background-color: #161b22;
+            border-color: #30363d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-results p {
+            padding: 15px;
+            text-align: center;
+            color: #888;
+        }
+        
+        .search-results .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            color: #24292e;
+            transition: background-color 0.2s;
+        }
+        
+        .dark-mode .search-results .search-result-item {
+            color: #e0e0e0;
+        }
+        
+        .search-results .search-result-item:hover {
+            background-color: #f6f8fa;
+        }
+        
+        .dark-mode .search-results .search-result-item:hover {
+            background-color: #30363d;
+        }
+        
+        .search-result-item .preview {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            margin-right: 12px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-result-item .preview img,
+        .search-result-item .preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .search-result-item .text-content {
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+        .search-result-item .text-content strong {
+            display: block;
+            font-size: 14px;
+        }
+        
+        .search-result-item .text-content small {
+            display: block;
+            font-size: 12px;
+            color: #6a737d;
+        }
+        
+        .dark-mode .search-result-item .text-content small {
+            color: #8b949e;
+        }
+        
+        /* Desktop Adjustments */
+        @media (min-width: 600px) {
+            .gallery-container, .video-container {
+                columns: 3;
+            }
+            .btn.primary {
+                display: block;
+            }
+            .search-results {
+                width: calc(100% - 32px);
+            }
+        }
+        
+        @media (min-width: 900px) {
+            .gallery-container, .video-container {
+                columns: 4;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .gallery-container, .video-container {
+                columns: 5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="musik" class="logo">
+            <img src="static/images/logo_akatsuki&.png" alt="Logo Akatsuki">
+        </a>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <span class="search-icon" id="search-icon"><img src="static/images/icons_search.png" alt="Search Icon"></span>
+            <div id="search-results" class="search-results"></div>
+        </div>
+            <div class="dropdown-container">
+                <a href="#" class="btn profile" id="profile-btn">
+                    <img src="static/images/profile.png" alt="Profil">
+                </a>
+                <div id="profile-menu" class="dropdown-menu">
+                    <a href="#" class="dropdown-item" id="collection-btn">Koleksi</a>
+                    <a href="#" class="dropdown-item" id="settings-btn">Pengaturan</a>
+                    <a href="auth" class="dropdown-item">Login</a>
+                    <a href="google.com" id="logout-btn" class="dropdown-item">Logout</a>
+                    <div class="dropdown-divider"></div>
+                    <h4 class="dropdown-header">Login Social</h4>
+                    <a href="#" class="dropdown-item social-login fb">Login Facebook</a>
+                    <a href="#" class="dropdown-item social-login ig">Login Instagram</a>
+                    <div class="dropdown-divider"></div>
+                    <h4 class="dropdown-header">Category</h4>
+                    <ul id="category-list" class="category-list"></ul>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a href="musik.html" class="btn primary"><img src="static/images/music.png" style="width: 20px; height: 20px; border-radius: 50%;" alt="Musik"></a>
+        </div>
+    </header>
+    <main class="naruto-container">
+        <div class="scrolling-nav-wrapper">
+            <a href="#" class="scroll-btn left"> &lt; </a>
+            <div class="scrolling-nav-container">
+                <ul class="scrolling-nav-list text-list">
+                    <li class="nav-item active">Naruto</li>
+                    <li class="nav-item">Sasuke</li>
+                    <li class="nav-item">Uchiha Itachi</li>
+                    <li class="nav-item">Hinata</li>
+                    <li class="nav-item">Cute</li>
+                    <li class="nav-item">Hanabi</li>
+                    <li class="nav-item">Akatsuki</li>
+                    <li class="nav-item">Oppai</li>
+                    <li class="nav-item">FanArts</li>
+                    <li class="nav-item">manga</li>
+                    <li class="nav-item passife">Semua</li>
+                </ul>
+            </div>
+            <a href="#" class="scroll-btn right"> &gt; </a>
+        </div>
+        <div id="gallery-container" class="gallery-container"></div>
+        <div id="video-gallery-container" class="video-container"></div>
+    </main>
+
+    <div id="saved-gallery-modal" style="display: none;">
+        <div class="modal-content">
+            <button id="close-gallery-modal-btn" class="close-modal-btn">&times;</button>
+            <h2>Koleksi</h2>
+            <div id="saved-gallery-container" class="gallery-container"></div>
+        </div>
+    </div>
+
+    <div id="settings-modal" style="display: none;">
+        <div class="modal-content">
+            <button id="close-modal-btn" class="close-modal-btn">&times;</button>
+            <div class="settings-section">
+                <h3> Buat Akun </h3>
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-name">Nama</label>
+                    <input type="text" id="profile-name">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-email">Email</label>
+                    <input type="email" id="profile-email">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="profile-photo">Ganti Foto Profil</label>
+                    <input type="file" id="profile-photo" accept="image/*">
+                </div>
+                <button id="save-profile-btn">Simpan</button>
+            </div>
+            <div class="settings-section">
+                <h3>Tampilan</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Dark Mode</span>
+                    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <i class="fa fa-adjust" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>Notifikasi</h3>
+                <ul id="notification-list" class="notification-list"></ul>
+            </div>
+            <div class="settings-section">
+                <h3>Pesan Masuk</h3>
+                <ul id="message-list" class="message-list"></ul>
+            </div>
+        </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileBtn = document.getElementById('profile-btn');
+        const profileMenu = document.getElementById('profile-menu');
+        const categoryList = document.getElementById('category-list');
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsModal = document.getElementById('settings-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const savedGalleryModal = document.getElementById('saved-gallery-modal');
+        const closeGalleryModalBtn = document.getElementById('close-gallery-modal-btn');
+        const collectionBtn = document.getElementById('collection-btn');
+        const profileNameInput = document.getElementById('profile-name');
+        const profileEmailInput = document.getElementById('profile-email');
+        const profilePhotoInput = document.getElementById('profile-photo');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const profileImg = document.querySelector('.btn.profile img');
+        const logoutBtn = document.getElementById('logout-btn');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const galleryContainer = document.getElementById('gallery-container');
+        const videoGalleryContainer = document.getElementById('video-gallery-container');
+        const navItems = document.querySelectorAll('.scrolling-nav-container .nav-item');
+        const scrollingNavContainer = document.querySelector('.scrolling-nav-container');
+        const leftScrollBtn = document.querySelector('.scroll-btn.left');
+        const rightScrollBtn = document.querySelector('.scroll-btn.right');
+
+        let allImages = [];
+        let allVideos = [];
+        let allContent = [];
+
+        // Fetch all content initially
+        Promise.all([
+            fetch('static/images.json').then(res => res.json()).catch(() => ({ images: [] })),
+            fetch('static/videos.json').then(res => res.json()).catch(() => ({ videos: [] }))
+        ]).then(data => {
+            allImages = data[0].images;
+            allVideos = data[1].videos;
+            allContent = [...allImages, ...allVideos];
+
+            displayImages(allImages);
+            displayVideos(allVideos);
+            
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase().trim();
+                if (query.length > 0) {
+                    searchAllContent(query);
+                    searchResults.classList.add('visible');
+                } else {
+                    searchResults.innerHTML = '';
+                    searchResults.classList.remove('visible');
+                }
+            });
+            
+            // Menutup hasil pencarian saat mengklik di luar
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-bar')) {
+                    searchResults.classList.remove('visible');
+                }
+            });
+
+        }).catch(error => {
+            console.error('Ada masalah dengan fetch operation:', error);
+            galleryContainer.innerHTML = '<p>Gagal memuat galeri. Silakan coba lagi nanti.</p>';
+        });
+
+        function displayImages(imagesToDisplay) {
+            galleryContainer.innerHTML = '';
+            imagesToDisplay.forEach(image => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.id = image.id;
+
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.title;
+                card.appendChild(img);
+
+                const overlay = document.createElement('div');
+                overlay.classList.add('overlay');
+                
+                // Event listener untuk overlay
+                overlay.addEventListener('click', (e) => {
+                    // Cek apakah target klik BUKAN tombol-tombol di dalamnya
+                    if (e.target.tagName.toLowerCase() !== 'button' && e.target.tagName.toLowerCase() !== 'i' && !e.target.closest('.more-options-menu')) {
+                        window.location.href = `second?src=${encodeURIComponent(image.src)}`;
+                    }
+                });
+                
+                const overlayButtons = document.createElement('div');
+                overlayButtons.classList.add('overlay-buttons');
+                
+                const saveBtn = document.createElement('button');
+                saveBtn.classList.add('save-btn');
+                saveBtn.textContent = 'Simpan';
+                saveBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
+                    let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                    const isAlreadySaved = savedImages.some(item => item.id === image.id);
+                    if (!isAlreadySaved) {
+                        savedImages.push({ id: image.id, src: image.src, title: image.title });
+                        localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                        alert(`Gambar ${image.title} berhasil disimpan!`);
+                    } else {
+                        alert(`Gambar ${image.title} sudah pernah kamu simpan!`);
+                    }
+                });
+                overlayButtons.appendChild(saveBtn);
+                
+                const shareBtn = document.createElement('button');
+                shareBtn.classList.add('share-btn');
+                shareBtn.innerHTML = '<i class="fas fa-share-alt"></i>';
+                shareBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
+                    if (navigator.share) {
+                        navigator.share({
+                            title: image.title,
+                            text: 'Lihat gambar Naruto ini!',
+                            url: image.src,
+                        }).then(() => {
+                            console.log('Berhasil berbagi!');
+                        }).catch((error) => {
+                            console.error('Gagal berbagi:', error);
+                        });
+                    } else {
+                        alert(`Tidak dapat berbagi melalui perangkat ini. ${image.title}!`);
+                    }
+                });
+                overlayButtons.appendChild(shareBtn);
+                
+                const moreOptionsContainer = document.createElement('div');
+                moreOptionsContainer.classList.add('more-options-container');
+
+                const moreBtn = document.createElement('button');
+                moreBtn.classList.add('more-btn');
+                moreBtn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+                moreBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
+                    document.querySelectorAll('.more-options-menu.show').forEach(menu => {
+                        if (menu !== moreOptionsMenu) {
+                            menu.classList.remove('show');
+                        }
+                    });
+                    moreOptionsMenu.classList.toggle('show');
+                });
+                moreOptionsContainer.appendChild(moreBtn);
+
+                const moreOptionsMenu = document.createElement('div');
+                moreOptionsMenu.classList.add('more-options-menu');
+                moreOptionsMenu.innerHTML = `
+                    <span class="more-options-menu-item" data-action="hide">Sembunyikan</span>
+                    <span class="more-options-menu-item" data-action="report">Laporkan</span>
+                    <span class="more-options-menu-item" data-action="delete">Hapus dari Koleksi</span>
+                    <span class="more-options-menu-item" data-action="copy-link">Salin Link</span>
+                `;
+                moreOptionsMenu.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
+                    const action = e.target.getAttribute('data-action');
+                    const cardElement = e.target.closest('.card');
+                    
+                    if (action === 'hide') {
+                        alert(`Menyembunyikan Pin ${image.title}.`);
+                        cardElement.style.display = 'none';
+                    } else if (action === 'report') {
+                        alert(`Melaporkan Pin ${image.title}.`);
+                    } else if (action === 'delete') {
+                         let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                         savedImages = savedImages.filter(item => item.id !== image.id);
+                         localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                         alert(`Menghapus ${image.title} dari koleksi.`);
+                    } else if (action === 'copy-link') {
+                        const imgElement = cardElement.querySelector('img');
+                        if (imgElement) {
+                            // Ambil URL dari elemen gambar
+                            let imageSrc = imgElement.src;
+                            
+                            // Coba untuk mendekode URI terlebih dahulu
+                            try {
+                                imageSrc = decodeURI(imageSrc);
+                            } catch (e) {
+                                // Jika ada kesalahan saat mendekode, biarkan saja
+                            }
+                    
+                            // Gabungkan dengan origin (http://localhost:4000)
+                            const fullUrl = window.location.origin + imageSrc.replace(window.location.origin, '');
+                    
+                            // Lakukan pengkodean URI yang benar, hanya sekali
+                            const encodedUrl = encodeURI(fullUrl);
+                            
+                            navigator.clipboard.writeText(encodedUrl).then(() => {
+                                alert('Link berhasil disalin!');
+                            }).catch(err => {
+                                console.error('Gagal menyalin link: ', err);
+                                alert('Gagal menyalin link.');
+                            });
+                        } else {
+                             alert('Tidak dapat menemukan gambar.');
+                        }
+                    }
+                    moreOptionsMenu.classList.remove('show');
+                });
+                moreOptionsContainer.appendChild(moreOptionsMenu);
+                overlayButtons.appendChild(moreOptionsContainer);
+                
+                overlay.appendChild(overlayButtons);
+                
+                const overlayFooter = document.createElement('div');
+                overlayFooter.classList.add('overlay-footer');
+                
+                const likeContainer = document.createElement('div');
+                likeContainer.classList.add('like-container');
+                
+                const savedLikes = localStorage.getItem('likes_' + image.id);
+                const initialLikes = savedLikes ? parseInt(savedLikes) : (image.likes || 0);
+                likeContainer.innerHTML = `<i class="fas fa-heart like-icon"></i><span class="like-count">${initialLikes}</span>`;
+                const likeIcon = likeContainer.querySelector('.like-icon');
+                const likeCount = likeContainer.querySelector('.like-count');
+
+                const isLiked = localStorage.getItem('isLiked_' + image.id) === 'true';
+                if (isLiked) {
+                    likeIcon.classList.add('liked');
+                }
+
+                likeIcon.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
+                    let currentLikes = parseInt(likeCount.textContent);
+                    likeIcon.classList.toggle('liked');
+
+                    if (likeIcon.classList.contains('liked')) {
+                        currentLikes++;
+                        localStorage.setItem('isLiked_' + image.id, 'true');
+                    } else {
+                        currentLikes--;
+                        localStorage.setItem('isLiked_' + image.id, 'false');
+                    }
+
+                    likeCount.textContent = currentLikes;
+                    localStorage.setItem('likes_' + image.id, currentLikes);
+                });
+                overlayFooter.appendChild(likeContainer);
+                
+                const sourceLink = document.createElement('a');
+                sourceLink.classList.add('source-link');
+                sourceLink.href = image.href || '#';
+                sourceLink.target = '_blank';
+                sourceLink.innerHTML = '<i class="fas fa-external-link-alt"></i>';
+                sourceLink.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                });
+                overlayFooter.appendChild(sourceLink);
+                
+                overlay.appendChild(overlayFooter);
+                card.appendChild(overlay);
+
+                galleryContainer.appendChild(card);
+            });
+        }
+
+        function displayVideos(videosToDisplay) {
+            videoGalleryContainer.innerHTML = '';
+            videosToDisplay.forEach(video => {
+                const card = document.createElement('div');
+                card.classList.add('video-card');
+
+                const videoElement = document.createElement('video');
+                videoElement.src = video.src;
+                videoElement.controls = true;
+                videoElement.addEventListener('click', (e) => {
+                    // Ini video, jadi kita bisa langsung aja mencegah default behavior
+                    e.preventDefault(); 
+                    window.location.href = `second?src=${encodeURIComponent(video.src)}`;
+                });
+                card.appendChild(videoElement);
+
+                const title = document.createElement('h7');
+                title.textContent = video.title;
+                card.appendChild(title);
+                
+                videoGalleryContainer.appendChild(card);
+            });
+        }
+        
+        // PERBAIKAN PENTING DI SINI:
+        function searchAllContent(query) {
+            searchResults.innerHTML = '';
+            const filteredResults = allContent.filter(item => {
+                const searchableText = `${item.title || ''} ${item.artist || ''} ${item.category || ''}`.toLowerCase();
+                return searchableText.includes(query);
+            });
+            if (filteredResults.length === 0) {
+                searchResults.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
+                return;
+            }
+
+            filteredResults.forEach(item => {
+                const itemLink = document.createElement('a');
+                itemLink.href = `second?src=${encodeURIComponent(item.src)}`;
+                itemLink.classList.add('search-result-item');
+                
+                // Langsung membuat dan menambahkan elemen media tanpa lapisan div preview
+                let mediaElement;
+                const isVideo = item.src.endsWith('.mp4');
+
+                if (isVideo) {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = item.src;
+                    mediaElement.autoplay = true;
+                    mediaElement.muted = true;
+                    mediaElement.loop = true;
+                } else {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = item.src;
+                    mediaElement.alt = item.title;
+                }
+                
+                mediaElement.style.width = '50px';
+                mediaElement.style.height = '50px';
+                mediaElement.style.objectFit = 'cover';
+                mediaElement.style.borderRadius = '4px';
+                mediaElement.style.flexShrink = '0';
+                mediaElement.style.marginRight = '12px';
+
+                itemLink.appendChild(mediaElement);
+
+                const textContentDiv = document.createElement('div');
+                textContentDiv.classList.add('text-content');
+                const titleElement = document.createElement('strong');
+                titleElement.textContent = item.title || 'Konten';
+                const subtitleElement = document.createElement('small');
+                subtitleElement.textContent = item.category ? `Kategori: ${item.category}` : '';
+
+                textContentDiv.appendChild(titleElement);
+                textContentDiv.appendChild(subtitleElement);
+
+                itemLink.appendChild(textContentDiv);
+                searchResults.appendChild(itemLink);
+            });
+        }
+        
+        if (profileBtn) {
+            profileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                profileMenu.classList.toggle('show');
+                loadCategories();
+            });
+        }
+        
+        window.addEventListener('click', function(event) {
+            if (profileMenu && !event.target.closest('.dropdown-container')) {
+                profileMenu.classList.remove('show');
+            }
+            // Menutup menu '...' saat mengklik di luar
+            document.querySelectorAll('.more-options-menu.show').forEach(menu => {
+                if (!event.target.closest('.more-options-container')) {
+                     menu.classList.remove('show');
+                }
+            });
+        });
+        
+        function loadCategories() {
+            fetch('static/categories.json')
+                .then(response => response.json())
+                .then(data => {
+                    categoryList.innerHTML = '';
+                    data.categories.forEach(category => {
+                        const li = document.createElement('li');
+                        li.textContent = category.name;
+                        categoryList.appendChild(li);
+                    });
+                });
+        }
+        
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                settingsModal.style.display = 'flex';
+                loadNotifications();
+                loadMessages();
+            });
+        }
+        
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function() {
+                settingsModal.style.display = 'none';
+            });
+        }
+        
+        if (saveProfileBtn) {
+            saveProfileBtn.addEventListener('click', function() {
+                const name = profileNameInput.value;
+                const email = profileEmailInput.value;
+                localStorage.setItem('profileName', name);
+                localStorage.setItem('profileEmail', email);
+                if (profilePhotoInput.files.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoDataUrl = e.target.result;
+                        localStorage.setItem('profilePhoto', photoDataUrl);
+                        profileImg.src = photoDataUrl;
+                        alert('Profil berhasil diperbarui!');
+                    };
+                    reader.readAsDataURL(profilePhotoInput.files[0]);
+                } else {
+                    alert('Profil berhasil diperbarui!');
+                }
+            });
+        }
+        
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.clear();
+                alert('Anda telah berhasil logout.');
+                window.location.href = 'https://www.google.com/';
+            });
+        }
+        
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+        
+        function loadNotifications() {
+            const notifList = document.getElementById('notification-list');
+            notifList.innerHTML = '';
+            fetch('/get-notifications')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.notifications.length === 0) {
+                        notifList.innerHTML = '<li class="notification-item">Tidak ada notifikasi baru.</li>';
+                        return;
+                    }
+                    data.notifications.forEach(notif => {
+                        const li = document.createElement('li');
+                        li.classList.add('notification-item');
+                        li.innerHTML = `<p class="notification-text">${notif.text}</p>`;
+                        notifList.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error('Gagal memuat notifikasi:', error);
+                    notifList.innerHTML = '<li class="notification-item">Gagal memuat notifikasi.</li>';
+                });
+        }
+        
+        function loadMessages() {
+            const pesanList = document.getElementById('message-list');
+            pesanList.innerHTML = '';
+            fetch('/get-messages')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.messages.length === 0) {
+                        pesanList.innerHTML = '<li class="message-item">Tidak ada pesan baru.</li>';
+                        return;
+                    }
+                    data.messages.forEach(pesan => {
+                        const li = document.createElement('li');
+                        li.classList.add('message-item');
+                        li.innerHTML = `<p class="message-text"><strong>${pesan.from || 'Admin'}:</strong> ${pesan.text}</p>`;
+                        pesanList.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error('Gagal memuat pesan:', error);
+                    pesanList.innerHTML = '<li class="message-item">Gagal memuat pesan.</li>';
+                });
+        }
+        
+        if (closeGalleryModalBtn) {
+            closeGalleryModalBtn.addEventListener('click', function() {
+                savedGalleryModal.style.display = 'none';
+            });
+        }
+        
+        function displaySavedImages() {
+            const savedGalleryContainer = document.getElementById('saved-gallery-container');
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            savedGalleryContainer.innerHTML = '';
+            if (savedImages.length === 0) {
+                savedGalleryContainer.innerHTML = '<p style="text-align: center;">Tidak ada gambar yang disimpan.</p>';
+                return;
+            }
+            savedImages.forEach(image => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = image.title;
+                card.appendChild(img);
+                savedGalleryContainer.appendChild(card);
+            });
+        }
+        
+        if (collectionBtn) {
+            collectionBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                displaySavedImages();
+                savedGalleryModal.style.display = 'flex';
+            });
+        }
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const category = this.textContent.toLowerCase();
+                navItems.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                let filteredImages = [];
+                let filteredVideos = [];
+
+                if (category === 'semua') {
+                    filteredImages = allImages;
+                    filteredVideos = allVideos;
+                } else {
+                    filteredImages = allImages.filter(image => image.category.toLowerCase() === category);
+                    filteredVideos = allVideos.filter(video => video.category.toLowerCase() === category);
+                }
+                
+                displayImages(filteredImages);
+                displayVideos(filteredVideos);
+            });
+        });
+        
+        if (leftScrollBtn) {
+            leftScrollBtn.addEventListener('click', () => {
+                scrollingNavContainer.scrollBy({ left: -200, behavior: 'smooth' });
+            });
+        }
+        if (rightScrollBtn) {
+            rightScrollBtn.addEventListener('click', () => {
+                scrollingNavContainer.scrollBy({ left: 200, behavior: 'smooth' });
+            });
+        }
+        
+        const loginFacebookBtn = document.querySelector('.dropdown-item.social-login.fb');
+        const loginInstagramBtn = document.querySelector('.dropdown-item.social-login.ig');
+
+        if (loginFacebookBtn) {
+            loginFacebookBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Login Facebook Dulu Gan');
+                window.location.href = 'https://www.facebook.com/accounts/login/';
+            });
+        }
+        if (loginInstagramBtn) {
+            loginInstagramBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert ('Login Ig Bosskuu');
+                window.location.href = 'https://www.instagram.com/accounts/login/';
+            });
+        }
+    });
+</script>
+    
+</body>
+</html>
