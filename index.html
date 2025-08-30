@@ -7,7 +7,7 @@
     <meta name="description" content="Koleksi Gambar Dan Video Naruto">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/x-icon" href="static/images/logo_head.png">
-    <title>Whyd1</title>
+    <title>Whyd1 - Naruto Collections</title>
     
     <style>
         /* CSS yang krusial untuk tampilan awal halaman */
@@ -1285,7 +1285,7 @@
                     const videoElement = document.createElement('video');
                     videoElement.src = video.src;
                     videoElement.controls = true;
-                    videoElement.setAttribute('loading', 'lazy'); // Tambahkan lazy loading
+                    videoElement.setAttribute('preload', 'metadata'); // Tambahkan lazy loading
                     videoElement.setAttribute('width', '500'); // Atur lebar default
                     videoElement.setAttribute('height', 'auto'); // Atur tinggi default
                     videoElement.addEventListener('click', (e) => {
