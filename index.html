@@ -8,9 +8,9 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/x-icon" href="static/images/logo_head.png">
     <title>Whyd1</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" defer>
+    
     <style>
-        /* Base Styles - Light Mode */
+        /* CSS yang krusial untuk tampilan awal halaman */
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
             background-color: #f6f8fa;
@@ -25,15 +25,17 @@
             margin: 0;
             padding: 0;
         }
-
+        
         html {
             scroll-behavior: smooth;
         }
+
         @font-face {
            font-family: 'January Night';
            src: url('static/fonts/January Night.ttf') format('truetype');
            font-weight: normal;
            font-style: italic;
+           font-display: swap; /* Perbaikan: Gunakan swap */
         }
         h1, h2, h3, h4, h5, h6, h7, p, a, div, label, input, span {
            font-family: 'January Night';
@@ -43,8 +45,7 @@
             text-decoration: none;
             color: #0366d6;
         }
-
-        /* Header & Navigation */
+        
         .header {
             display: flex;
             align-items: center;
@@ -391,7 +392,6 @@
             font-size: 14px;
         }
 
-        /* PERBAIKAN: Posisi dan styling untuk tombol dan menu '...' */
         .more-options-container {
             position: relative;
             display: inline-block;
@@ -888,38 +888,47 @@
                 columns: 5;
             }
         }
+        
+        /* CSS untuk SVG Ikon */
+        .icon-svg {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+        
     </style>
 </head>
 <body class="dark-mode">
     <header class="header">
         <a href="musik" class="logo">
-            <img src="static/images/logo_akatsuki&.png" alt="Logo Akatsuki">
+            <img src="static/images/logo_akatsuki&.png" alt="Logo Akatsuki" width="32" height="32">
         </a>
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Search...">
-            <span class="search-icon" id="search-icon"><img src="static/images/icons_search.png" alt="Search Icon"></span>
+            <span class="search-icon" id="search-icon"><img src="static/images/icons_search.png" alt="Search Icon" width="16" height="16"></span>
             <div id="search-results" class="search-results"></div>
         </div>
-            <div class="dropdown-container">
-                <a href="#" class="btn profile" id="profile-btn">
-                    <img src="static/images/profile.png" alt="Profil">
-                </a>
-                <div id="profile-menu" class="dropdown-menu">
-                    <a href="#" class="dropdown-item" id="collection-btn">Koleksi</a>
-                    <a href="#" class="dropdown-item" id="settings-btn">Pengaturan</a>
-                    <a href="auth" class="dropdown-item">Login</a>
-                    <a href="google.com" id="logout-btn" class="dropdown-item">Logout</a>
-                    <div class="dropdown-divider"></div>
-                    <h4 class="dropdown-header">Login Social</h4>
-                    <a href="#" class="dropdown-item social-login fb">Login Facebook</a>
-                    <a href="#" class="dropdown-item social-login ig">Login Instagram</a>
-                    <div class="dropdown-divider"></div>
-                    <h4 class="dropdown-header">Category</h4>
-                    <ul id="category-list" class="category-list"></ul>
+        <div class="dropdown-container">
+            <a href="#" class="btn profile" id="profile-btn">
+                <img src="static/images/profile.png" alt="Profil" width="32" height="32">
+            </a>
+            <div id="profile-menu" class="dropdown-menu">
+                <a href="#" class="dropdown-item" id="collection-btn">Koleksi</a>
+                <a href="#" class="dropdown-item" id="settings-btn">Pengaturan</a>
+                <a href="auth" class="dropdown-item">Login</a>
+                <a href="google.com" id="logout-btn" class="dropdown-item">Logout</a>
+                <div class="dropdown-divider"></div>
+                <h4 class="dropdown-header">Login Social</h4>
+                <a href="#" class="dropdown-item social-login fb">Login Facebook</a>
+                <a href="#" class="dropdown-item social-login ig">Login Instagram</a>
+                <div class="dropdown-divider"></div>
+                <h4 class="dropdown-header">Category</h4>
+                <ul id="category-list" class="category-list"></ul>
             </div>
         </div>
         <div class="nav-buttons">
-            <a href="musik.html" class="btn primary"><img src="static/images/music.png" style="width: 20px; height: 20px; border-radius: 50%;" alt="Musik"></a>
+            <a href="musik.html" class="btn primary"><img src="static/images/music.png" style="width: 20px; height: 20px; border-radius: 50%;" alt="Musik" width="20" height="20"></a>
         </div>
     </header>
     <main class="naruto-container">
@@ -978,7 +987,9 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span>Dark Mode</span>
                     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-                        <i class="fa fa-adjust" aria-hidden="true"></i>
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M464 256A208 208 0 1 0 256 464h0A208 208 0 1 0 256 48a208 208 0 1 0 0 416 208 208 0 1 0 0-416zm0 24A232 232 0 1 1 256 24a232 232 0 1 1 0 464zm-144-88a8 8 0 0 1 8-8h224a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H256a8 8 0 0 1-8-8v-16zm8 48a8 8 0 0 1 8-8h208a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H256a8 8 0 0 1-8-8v-16z"/>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -992,566 +1003,579 @@
             </div>
         </div>
     </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileBtn = document.getElementById('profile-btn');
-        const profileMenu = document.getElementById('profile-menu');
-        const categoryList = document.getElementById('category-list');
-        const settingsBtn = document.getElementById('settings-btn');
-        const settingsModal = document.getElementById('settings-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const savedGalleryModal = document.getElementById('saved-gallery-modal');
-        const closeGalleryModalBtn = document.getElementById('close-gallery-modal-btn');
-        const collectionBtn = document.getElementById('collection-btn');
-        const profileNameInput = document.getElementById('profile-name');
-        const profileEmailInput = document.getElementById('profile-email');
-        const profilePhotoInput = document.getElementById('profile-photo');
-        const saveProfileBtn = document.getElementById('save-profile-btn');
-        const profileImg = document.querySelector('.btn.profile img');
-        const logoutBtn = document.getElementById('logout-btn');
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        const searchInput = document.getElementById('search-input');
-        const searchResults = document.getElementById('search-results');
-        const galleryContainer = document.getElementById('gallery-container');
-        const videoGalleryContainer = document.getElementById('video-gallery-container');
-        const navItems = document.querySelectorAll('.scrolling-nav-container .nav-item');
-        const scrollingNavContainer = document.querySelector('.scrolling-nav-container');
-        const leftScrollBtn = document.querySelector('.scroll-btn.left');
-        const rightScrollBtn = document.querySelector('.scroll-btn.right');
 
-        let allImages = [];
-        let allVideos = [];
-        let allContent = [];
-
-        // Fetch all content initially
-        Promise.all([
-            fetch('static/images.json').then(res => res.json()).catch(() => ({ images: [] })),
-            fetch('static/videos.json').then(res => res.json()).catch(() => ({ videos: [] }))
-        ]).then(data => {
-            allImages = data[0].images;
-            allVideos = data[1].videos;
-            allContent = [...allImages, ...allVideos];
-
-            displayImages(allImages);
-            displayVideos(allVideos);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileBtn = document.getElementById('profile-btn');
+            const profileMenu = document.getElementById('profile-menu');
+            const categoryList = document.getElementById('category-list');
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsModal = document.getElementById('settings-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const savedGalleryModal = document.getElementById('saved-gallery-modal');
+            const closeGalleryModalBtn = document.getElementById('close-gallery-modal-btn');
+            const collectionBtn = document.getElementById('collection-btn');
+            const profileNameInput = document.getElementById('profile-name');
+            const profileEmailInput = document.getElementById('profile-email');
+            const profilePhotoInput = document.getElementById('profile-photo');
+            const saveProfileBtn = document.getElementById('save-profile-btn');
+            const profileImg = document.querySelector('.btn.profile img');
+            const logoutBtn = document.getElementById('logout-btn');
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const galleryContainer = document.getElementById('gallery-container');
+            const videoGalleryContainer = document.getElementById('video-gallery-container');
+            const navItems = document.querySelectorAll('.scrolling-nav-container .nav-item');
+            const scrollingNavContainer = document.querySelector('.scrolling-nav-container');
+            const leftScrollBtn = document.querySelector('.scroll-btn.left');
+            const rightScrollBtn = document.querySelector('.scroll-btn.right');
+            const loginFacebookBtn = document.querySelector('.dropdown-item.social-login.fb');
+            const loginInstagramBtn = document.querySelector('.dropdown-item.social-login.ig');
             
-            searchInput.addEventListener('input', function(e) {
-                const query = e.target.value.toLowerCase().trim();
-                if (query.length > 0) {
-                    searchAllContent(query);
-                    searchResults.classList.add('visible');
-                } else {
-                    searchResults.innerHTML = '';
-                    searchResults.classList.remove('visible');
-                }
-            });
-            
-            // Menutup hasil pencarian saat mengklik di luar
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.search-bar')) {
-                    searchResults.classList.remove('visible');
-                }
-            });
+            let allImages = [];
+            let allVideos = [];
+            let allContent = [];
 
-        }).catch(error => {
-            console.error('Ada masalah dengan fetch operation:', error);
-            galleryContainer.innerHTML = '<p>Gagal memuat galeri. Silakan coba lagi nanti.</p>';
-        });
+            // Fetch all content initially
+            Promise.all([
+                fetch('static/images.json').then(res => res.json()).catch(() => ({ images: [] })),
+                fetch('static/videos.json').then(res => res.json()).catch(() => ({ videos: [] }))
+            ]).then(data => {
+                allImages = data[0].images;
+                allVideos = data[1].videos;
+                allContent = [...allImages, ...allVideos];
 
-        function displayImages(imagesToDisplay) {
-            galleryContainer.innerHTML = '';
-            imagesToDisplay.forEach(image => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.id = image.id;
-
-                const img = document.createElement('img');
-                img.src = image.src;
-                img.alt = image.title;
-                card.appendChild(img);
-
-                const overlay = document.createElement('div');
-                overlay.classList.add('overlay');
+                displayImages(allImages);
+                displayVideos(allVideos);
                 
-                // Event listener untuk overlay
-                overlay.addEventListener('click', (e) => {
-                    // Cek apakah target klik BUKAN tombol-tombol di dalamnya
-                    if (e.target.tagName.toLowerCase() !== 'button' && e.target.tagName.toLowerCase() !== 'i' && !e.target.closest('.more-options-menu')) {
-                        window.location.href = `second.html?src=${encodeURIComponent(image.src)}`;
-                    }
-                });
-                
-                const overlayButtons = document.createElement('div');
-                overlayButtons.classList.add('overlay-buttons');
-                
-                const saveBtn = document.createElement('button');
-                saveBtn.classList.add('save-btn');
-                saveBtn.textContent = 'Simpan';
-                saveBtn.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
-                    let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-                    const isAlreadySaved = savedImages.some(item => item.id === image.id);
-                    if (!isAlreadySaved) {
-                        savedImages.push({ id: image.id, src: image.src, title: image.title });
-                        localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                        alert(`Gambar ${image.title} berhasil disimpan!`);
+                searchInput.addEventListener('input', function(e) {
+                    const query = e.target.value.toLowerCase().trim();
+                    if (query.length > 0) {
+                        searchAllContent(query);
+                        searchResults.classList.add('visible');
                     } else {
-                        alert(`Gambar ${image.title} sudah pernah kamu simpan!`);
+                        searchResults.innerHTML = '';
+                        searchResults.classList.remove('visible');
                     }
                 });
-                overlayButtons.appendChild(saveBtn);
                 
-                const shareBtn = document.createElement('button');
-                shareBtn.classList.add('share-btn');
-                shareBtn.innerHTML = '<i class="fas fa-share-alt"></i>';
-                shareBtn.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
-                    if (navigator.share) {
-                        navigator.share({
-                            title: image.title,
-                            text: 'Lihat gambar Naruto ini!',
-                            url: image.src,
-                        }).then(() => {
-                            console.log('Berhasil berbagi!');
-                        }).catch((error) => {
-                            console.error('Gagal berbagi:', error);
-                        });
-                    } else {
-                        alert(`Tidak dapat berbagi melalui perangkat ini. ${image.title}!`);
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.search-bar')) {
+                        searchResults.classList.remove('visible');
                     }
                 });
-                overlayButtons.appendChild(shareBtn);
-                
-                const moreOptionsContainer = document.createElement('div');
-                moreOptionsContainer.classList.add('more-options-container');
 
-                const moreBtn = document.createElement('button');
-                moreBtn.classList.add('more-btn');
-                moreBtn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-                moreBtn.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
-                    document.querySelectorAll('.more-options-menu.show').forEach(menu => {
-                        if (menu !== moreOptionsMenu) {
-                            menu.classList.remove('show');
+            }).catch(error => {
+                console.error('Ada masalah dengan fetch operation:', error);
+                galleryContainer.innerHTML = '<p>Gagal memuat galeri. Silakan coba lagi nanti.</p>';
+            });
+
+            function displayImages(imagesToDisplay) {
+                galleryContainer.innerHTML = '';
+                imagesToDisplay.forEach(image => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.id = image.id;
+
+                    const img = document.createElement('img');
+                    img.src = image.src;
+                    img.alt = image.title;
+                    img.setAttribute('loading', 'lazy'); // Tambahkan lazy loading
+                    img.setAttribute('width', '500'); // Atur lebar default
+                    img.setAttribute('height', 'auto'); // Atur tinggi default
+                    card.appendChild(img);
+
+                    const overlay = document.createElement('div');
+                    overlay.classList.add('overlay');
+                    
+                    overlay.addEventListener('click', (e) => {
+                        if (e.target.tagName.toLowerCase() !== 'button' && e.target.tagName.toLowerCase() !== 'i' && !e.target.closest('.more-options-menu')) {
+                            window.location.href = `second.html?src=${encodeURIComponent(image.src)}`;
                         }
                     });
-                    moreOptionsMenu.classList.toggle('show');
-                });
-                moreOptionsContainer.appendChild(moreBtn);
-
-                const moreOptionsMenu = document.createElement('div');
-                moreOptionsMenu.classList.add('more-options-menu');
-                moreOptionsMenu.innerHTML = `
-                    <span class="more-options-menu-item" data-action="hide">Sembunyikan</span>
-                    <span class="more-options-menu-item" data-action="report">Laporkan</span>
-                    <span class="more-options-menu-item" data-action="delete">Hapus dari Koleksi</span>
-                    <span class="more-options-menu-item" data-action="copy-link">Salin Link</span>
-                `;
-                moreOptionsMenu.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
-                    const action = e.target.getAttribute('data-action');
-                    const cardElement = e.target.closest('.card');
                     
-                    if (action === 'hide') {
-                        alert(`Menyembunyikan Pin ${image.title}.`);
-                        cardElement.style.display = 'none';
-                    } else if (action === 'report') {
-                        alert(`Melaporkan Pin ${image.title}.`);
-                    } else if (action === 'delete') {
-                         let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-                         savedImages = savedImages.filter(item => item.id !== image.id);
-                         localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                         alert(`Menghapus ${image.title} dari koleksi.`);
-                    } else if (action === 'copy-link') {
-                        const imgElement = cardElement.querySelector('img');
-                        if (imgElement) {
-                            // Ambil URL dari elemen gambar
-                            let imageSrc = imgElement.src;
-                            
-                            // Coba untuk mendekode URI terlebih dahulu
-                            try {
-                                imageSrc = decodeURI(imageSrc);
-                            } catch (e) {
-                                // Jika ada kesalahan saat mendekode, biarkan saja
-                            }
+                    const overlayButtons = document.createElement('div');
+                    overlayButtons.classList.add('overlay-buttons');
                     
-                            // Gabungkan dengan origin (http://localhost:4000)
-                            const fullUrl = window.location.origin + imageSrc.replace(window.location.origin, '');
+                    const saveBtn = document.createElement('button');
+                    saveBtn.classList.add('save-btn');
+                    saveBtn.textContent = 'Simpan';
+                    saveBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                        let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                        const isAlreadySaved = savedImages.some(item => item.id === image.id);
+                        if (!isAlreadySaved) {
+                            savedImages.push({ id: image.id, src: image.src, title: image.title });
+                            localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                            alert(`Gambar ${image.title} berhasil disimpan!`);
+                        } else {
+                            alert(`Gambar ${image.title} sudah pernah kamu simpan!`);
+                        }
+                    });
+                    overlayButtons.appendChild(saveBtn);
                     
-                            p
-                            const encodedUrl = encodeURI(fullUrl);
-                            
-                            navigator.clipboard.writeText(encodedUrl).then(() => {
-                                alert('Link berhasil disalin!');
-                            }).catch(err => {
-                                console.error('Gagal menyalin link: ', err);
-                                alert('Gagal menyalin link.');
+                    const shareBtn = document.createElement('button');
+                    shareBtn.classList.add('share-btn');
+                    // Mengganti i tag dengan SVG inline
+                    shareBtn.innerHTML = `
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M495.9 166.6L415.8 54.4c-3.1-4.1-7.9-6.4-12.7-6.4H112.9c-4.8 0-9.6 2.3-12.7 6.4L16.1 166.6C1 170.8-3.3 178.6 1.1 187.3L54.1 300.9c.7 1.4 1.7 2.6 2.9 3.6l106.9 94.4c8.4 7.4 20.3 7.8 28.1 .9c2.3-2.1 4.2-4.5 5.8-7.2L256 325.2 324.2 391.2c1.6 2.7 3.5 5.1 5.8 7.2c7.8 6.9 19.7 6.5 28.1-.9l106.9-94.4c1.2-1 2.2-2.2 2.9-3.6L510.9 187.3c4.4-8.7 .1-16.5-1.1-20.7z"/>
+                        </svg>
+                    `;
+                    shareBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                        if (navigator.share) {
+                            navigator.share({
+                                title: image.title,
+                                text: 'Lihat gambar Naruto ini!',
+                                url: image.src,
+                            }).then(() => {
+                                console.log('Berhasil berbagi!');
+                            }).catch((error) => {
+                                console.error('Gagal berbagi:', error);
                             });
                         } else {
-                             alert('Tidak dapat menemukan gambar.');
+                            alert(`Tidak dapat berbagi melalui perangkat ini. ${image.title}!`);
                         }
-                    }
-                    moreOptionsMenu.classList.remove('show');
-                });
-                moreOptionsContainer.appendChild(moreOptionsMenu);
-                overlayButtons.appendChild(moreOptionsContainer);
-                
-                overlay.appendChild(overlayButtons);
-                
-                const overlayFooter = document.createElement('div');
-                overlayFooter.classList.add('overlay-footer');
-                
-                const likeContainer = document.createElement('div');
-                likeContainer.classList.add('like-container');
-                
-                const savedLikes = localStorage.getItem('likes_' + image.id);
-                const initialLikes = savedLikes ? parseInt(savedLikes) : (image.likes || 0);
-                likeContainer.innerHTML = `<i class="fas fa-heart like-icon"></i><span class="like-count">${initialLikes}</span>`;
-                const likeIcon = likeContainer.querySelector('.like-icon');
-                const likeCount = likeContainer.querySelector('.like-count');
+                    });
+                    overlayButtons.appendChild(shareBtn);
+                    
+                    const moreOptionsContainer = document.createElement('div');
+                    moreOptionsContainer.classList.add('more-options-container');
 
-                const isLiked = localStorage.getItem('isLiked_' + image.id) === 'true';
-                if (isLiked) {
-                    likeIcon.classList.add('liked');
+                    const moreBtn = document.createElement('button');
+                    moreBtn.classList.add('more-btn');
+                    // Mengganti i tag dengan SVG inline
+                    moreBtn.innerHTML = `
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
+                            <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM0 64a64 64 0 1 1 128 0A64 64 0 1 1 0 64z"/>
+                        </svg>
+                    `;
+                    moreBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        document.querySelectorAll('.more-options-menu.show').forEach(menu => {
+                            if (menu !== moreOptionsMenu) {
+                                menu.classList.remove('show');
+                            }
+                        });
+                        moreOptionsMenu.classList.toggle('show');
+                    });
+                    moreOptionsContainer.appendChild(moreBtn);
+
+                    const moreOptionsMenu = document.createElement('div');
+                    moreOptionsMenu.classList.add('more-options-menu');
+                    moreOptionsMenu.innerHTML = `
+                        <span class="more-options-menu-item" data-action="hide">Sembunyikan</span>
+                        <span class="more-options-menu-item" data-action="report">Laporkan</span>
+                        <span class="more-options-menu-item" data-action="delete">Hapus dari Koleksi</span>
+                        <span class="more-options-menu-item" data-action="copy-link">Salin Link</span>
+                    `;
+                    moreOptionsMenu.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const action = e.target.getAttribute('data-action');
+                        const cardElement = e.target.closest('.card');
+                        
+                        if (action === 'hide') {
+                            alert(`Menyembunyikan Pin ${image.title}.`);
+                            cardElement.style.display = 'none';
+                        } else if (action === 'report') {
+                            alert(`Melaporkan Pin ${image.title}.`);
+                        } else if (action === 'delete') {
+                             let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                             savedImages = savedImages.filter(item => item.id !== image.id);
+                             localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                             alert(`Menghapus ${image.title} dari koleksi.`);
+                        } else if (action === 'copy-link') {
+                            const imgElement = cardElement.querySelector('img');
+                            if (imgElement) {
+                                let imageSrc = imgElement.src;
+                                try {
+                                    imageSrc = decodeURI(imageSrc);
+                                } catch (e) {}
+                                const fullUrl = window.location.origin + imageSrc.replace(window.location.origin, '');
+                                const encodedUrl = encodeURI(fullUrl);
+                                navigator.clipboard.writeText(encodedUrl).then(() => {
+                                    alert('Link berhasil disalin!');
+                                }).catch(err => {
+                                    console.error('Gagal menyalin link: ', err);
+                                    alert('Gagal menyalin link.');
+                                });
+                            } else {
+                                 alert('Tidak dapat menemukan gambar.');
+                            }
+                        }
+                        moreOptionsMenu.classList.remove('show');
+                    });
+                    moreOptionsContainer.appendChild(moreOptionsMenu);
+                    overlayButtons.appendChild(moreOptionsContainer);
+                    
+                    overlay.appendChild(overlayButtons);
+                    
+                    const overlayFooter = document.createElement('div');
+                    overlayFooter.classList.add('overlay-footer');
+                    
+                    const likeContainer = document.createElement('div');
+                    likeContainer.classList.add('like-container');
+                    
+                    const savedLikes = localStorage.getItem('likes_' + image.id);
+                    const initialLikes = savedLikes ? parseInt(savedLikes) : (image.likes || 0);
+                    // Mengganti i tag dengan SVG inline
+                    likeContainer.innerHTML = `
+                        <svg class="icon-svg like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-43.5-30.1-78.4-67.9-85.4c-42.5-7.7-88.6 4-120.7 33.8L256 123.3 228.3 95.6c-32.1-29.8-78.2-41.5-120.7-33.8C30.1 107.1 0 142 0 185.5v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                        </svg>
+                        <span class="like-count">${initialLikes}</span>
+                    `;
+                    const likeIcon = likeContainer.querySelector('.like-icon');
+                    const likeCount = likeContainer.querySelector('.like-count');
+
+                    const isLiked = localStorage.getItem('isLiked_' + image.id) === 'true';
+                    if (isLiked) {
+                        likeIcon.classList.add('liked');
+                    }
+
+                    likeIcon.addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                        let currentLikes = parseInt(likeCount.textContent);
+                        likeIcon.classList.toggle('liked');
+
+                        if (likeIcon.classList.contains('liked')) {
+                            currentLikes++;
+                            localStorage.setItem('isLiked_' + image.id, 'true');
+                        } else {
+                            currentLikes--;
+                            localStorage.setItem('isLiked_' + image.id, 'false');
+                        }
+
+                        likeCount.textContent = currentLikes;
+                        localStorage.setItem('likes_' + image.id, currentLikes);
+                    });
+                    overlayFooter.appendChild(likeContainer);
+                    
+                    const sourceLink = document.createElement('a');
+                    sourceLink.classList.add('source-link');
+                    sourceLink.href = image.href || '#';
+                    sourceLink.target = '_blank';
+                    // Mengganti i tag dengan SVG inline
+                    sourceLink.innerHTML = `
+                        <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M352 0c-12.3 5.3-24.9 14.8-35.3 27.1L256 94.7l-60.7-67.6C184.2 27.2 169.6 20 154.5 20c-35 0-63.5 28.5-63.5 63.5V106.8c0 12.3-5.3 24.9-14.8 35.3L27.1 202.7C14.8 213.2 20 227.8 20 242.9v14.4c0 34.6 28.1 62.7 62.7 62.7H256V512h-22.7c-12.3-5.3-24.9-14.8-35.3-27.1L128 417.3l-60.7 67.6C59.8 484.8 45.2 492 30.1 492c-35 0-63.5-28.5-63.5-63.5V406.8c0-12.3 5.3-24.9 14.8-35.3L94.7 309.3C105.2 298.8 119.8 294 135 294h12.7c35 0 63.5-28.5 63.5-63.5V218.2c0-12.3 5.3-24.9 14.8-35.3L309.3 94.7C319.8 84.2 334.4 79 349.5 79c35 0 63.5 28.5 63.5 63.5V155.2c0 12.3 5.3 24.9 14.8 35.3L484.8 256C495.2 266.5 500 281.2 500 296.3v14.4c0 34.6-28.1 62.7-62.7 62.7H256v154.7h22.7c12.3-5.3 24.9-14.8 35.3-27.1L384 417.3l60.7 67.6C452.2 484.8 466.8 492 481.9 492c35 0 63.5-28.5 63.5-63.5V406.8c0-12.3-5.3-24.9-14.8-35.3L417.3 309.3C406.8 298.8 392.2 294 377.1 294h-12.7c-35 0-63.5 28.5-63.5 63.5V373.2c0 12.3-5.3 24.9-14.8 35.3L202.7 484.8C192.2 495.2 177.6 500 162.5 500c-35 0-63.5-28.5-63.5-63.5V406.8c0-12.3 5.3-24.9 14.8-35.3L190.7 309.3C201.2 298.8 215.8 294 231 294h12.7c35 0 63.5-28.5 63.5-63.5V218.2c0-12.3-5.3-24.9-14.8-35.3L202.7 94.7C192.2 84.2 177.6 79 162.5 79c-35 0-63.5 28.5-63.5-63.5V25.8C99 13.5 104.3 1.9 113.8 0L352 0z"/>
+                        </svg>
+                    `;
+                    sourceLink.addEventListener('click', (e) => {
+                        e.stopPropagation(); 
+                    });
+                    overlayFooter.appendChild(sourceLink);
+                    
+                    overlay.appendChild(overlayFooter);
+                    card.appendChild(overlay);
+
+                    galleryContainer.appendChild(card);
+                });
+            }
+
+            function displayVideos(videosToDisplay) {
+                videoGalleryContainer.innerHTML = '';
+                videosToDisplay.forEach(video => {
+                    const card = document.createElement('div');
+                    card.classList.add('video-card');
+
+                    const videoElement = document.createElement('video');
+                    videoElement.src = video.src;
+                    videoElement.controls = true;
+                    videoElement.setAttribute('loading', 'lazy'); // Tambahkan lazy loading
+                    videoElement.setAttribute('width', '500'); // Atur lebar default
+                    videoElement.setAttribute('height', 'auto'); // Atur tinggi default
+                    videoElement.addEventListener('click', (e) => {
+                        e.preventDefault(); 
+                        window.location.href = `second.html?src=${encodeURIComponent(video.src)}`;
+                    });
+                    card.appendChild(videoElement);
+
+                    const title = document.createElement('h7');
+                    title.textContent = video.title;
+                    card.appendChild(title);
+                    
+                    videoGalleryContainer.appendChild(card);
+                });
+            }
+            
+            function searchAllContent(query) {
+                searchResults.innerHTML = '';
+                const filteredResults = allContent.filter(item => {
+                    const searchableText = `${item.title || ''} ${item.artist || ''} ${item.category || ''}`.toLowerCase();
+                    return searchableText.includes(query);
+                });
+                if (filteredResults.length === 0) {
+                    searchResults.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
+                    return;
                 }
 
-                likeIcon.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah klik menyebar ke overlay
-                    let currentLikes = parseInt(likeCount.textContent);
-                    likeIcon.classList.toggle('liked');
+                filteredResults.forEach(item => {
+                    const itemLink = document.createElement('a');
+                    itemLink.href = `second.html?src=${encodeURIComponent(item.src)}`;
+                    itemLink.classList.add('search-result-item');
+                    
+                    let mediaElement;
+                    const isVideo = item.src.endsWith('.mp4');
 
-                    if (likeIcon.classList.contains('liked')) {
-                        currentLikes++;
-                        localStorage.setItem('isLiked_' + image.id, 'true');
+                    if (isVideo) {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = item.src;
+                        mediaElement.autoplay = true;
+                        mediaElement.muted = true;
+                        mediaElement.loop = true;
                     } else {
-                        currentLikes--;
-                        localStorage.setItem('isLiked_' + image.id, 'false');
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = item.src;
+                        mediaElement.alt = item.title;
                     }
+                    
+                    mediaElement.style.width = '50px';
+                    mediaElement.style.height = '50px';
+                    mediaElement.style.objectFit = 'cover';
+                    mediaElement.style.borderRadius = '4px';
+                    mediaElement.style.flexShrink = '0';
+                    mediaElement.style.marginRight = '12px';
 
-                    likeCount.textContent = currentLikes;
-                    localStorage.setItem('likes_' + image.id, currentLikes);
+                    itemLink.appendChild(mediaElement);
+
+                    const textContentDiv = document.createElement('div');
+                    textContentDiv.classList.add('text-content');
+                    const titleElement = document.createElement('strong');
+                    titleElement.textContent = item.title || 'Konten';
+                    const subtitleElement = document.createElement('small');
+                    subtitleElement.textContent = item.category ? `Kategori: ${item.category}` : '';
+
+                    textContentDiv.appendChild(titleElement);
+                    textContentDiv.appendChild(subtitleElement);
+
+                    itemLink.appendChild(textContentDiv);
+                    searchResults.appendChild(itemLink);
                 });
-                overlayFooter.appendChild(likeContainer);
-                
-                const sourceLink = document.createElement('a');
-                sourceLink.classList.add('source-link');
-                sourceLink.href = image.href || '#';
-                sourceLink.target = '_blank';
-                sourceLink.innerHTML = '<i class="fas fa-external-link-alt"></i>';
-                sourceLink.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                });
-                overlayFooter.appendChild(sourceLink);
-                
-                overlay.appendChild(overlayFooter);
-                card.appendChild(overlay);
-
-                galleryContainer.appendChild(card);
-            });
-        }
-
-        function displayVideos(videosToDisplay) {
-            videoGalleryContainer.innerHTML = '';
-            videosToDisplay.forEach(video => {
-                const card = document.createElement('div');
-                card.classList.add('video-card');
-
-                const videoElement = document.createElement('video');
-                videoElement.src = video.src;
-                videoElement.controls = true;
-                videoElement.addEventListener('click', (e) => {
-                    // Ini video, jadi kita bisa langsung aja mencegah default behavior
-                    e.preventDefault(); 
-                    window.location.href = `second.html?src=${encodeURIComponent(video.src)}`;
-                });
-                card.appendChild(videoElement);
-
-                const title = document.createElement('h7');
-                title.textContent = video.title;
-                card.appendChild(title);
-                
-                videoGalleryContainer.appendChild(card);
-            });
-        }
-        
-        // PERBAIKAN PENTING DI SINI:
-        function searchAllContent(query) {
-            searchResults.innerHTML = '';
-            const filteredResults = allContent.filter(item => {
-                const searchableText = `${item.title || ''} ${item.artist || ''} ${item.category || ''}`.toLowerCase();
-                return searchableText.includes(query);
-            });
-            if (filteredResults.length === 0) {
-                searchResults.innerHTML = '<p>Tidak ada hasil yang ditemukan.</p>';
-                return;
             }
-
-            filteredResults.forEach(item => {
-                const itemLink = document.createElement('a');
-                itemLink.href = `second.html?src=${encodeURIComponent(item.src)}`;
-                itemLink.classList.add('search-result-item');
-                
-                // Langsung membuat dan menambahkan elemen media tanpa lapisan div preview
-                let mediaElement;
-                const isVideo = item.src.endsWith('.mp4');
-
-                if (isVideo) {
-                    mediaElement = document.createElement('video');
-                    mediaElement.src = item.src;
-                    mediaElement.autoplay = true;
-                    mediaElement.muted = true;
-                    mediaElement.loop = true;
-                } else {
-                    mediaElement = document.createElement('img');
-                    mediaElement.src = item.src;
-                    mediaElement.alt = item.title;
-                }
-                
-                mediaElement.style.width = '50px';
-                mediaElement.style.height = '50px';
-                mediaElement.style.objectFit = 'cover';
-                mediaElement.style.borderRadius = '4px';
-                mediaElement.style.flexShrink = '0';
-                mediaElement.style.marginRight = '12px';
-
-                itemLink.appendChild(mediaElement);
-
-                const textContentDiv = document.createElement('div');
-                textContentDiv.classList.add('text-content');
-                const titleElement = document.createElement('strong');
-                titleElement.textContent = item.title || 'Konten';
-                const subtitleElement = document.createElement('small');
-                subtitleElement.textContent = item.category ? `Kategori: ${item.category}` : '';
-
-                textContentDiv.appendChild(titleElement);
-                textContentDiv.appendChild(subtitleElement);
-
-                itemLink.appendChild(textContentDiv);
-                searchResults.appendChild(itemLink);
-            });
-        }
-        
-        if (profileBtn) {
-            profileBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                profileMenu.classList.toggle('show');
-                loadCategories();
-            });
-        }
-        
-        window.addEventListener('click', function(event) {
-            if (profileMenu && !event.target.closest('.dropdown-container')) {
-                profileMenu.classList.remove('show');
+            
+            if (profileBtn) {
+                profileBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileMenu.classList.toggle('show');
+                    loadCategories();
+                });
             }
-            // Menutup menu '...' saat mengklik di luar
-            document.querySelectorAll('.more-options-menu.show').forEach(menu => {
-                if (!event.target.closest('.more-options-container')) {
-                     menu.classList.remove('show');
+            
+            window.addEventListener('click', function(event) {
+                if (profileMenu && !event.target.closest('.dropdown-container')) {
+                    profileMenu.classList.remove('show');
                 }
+                document.querySelectorAll('.more-options-menu.show').forEach(menu => {
+                    if (!event.target.closest('.more-options-container')) {
+                         menu.classList.remove('show');
+                    }
+                });
             });
-        });
-        
-        function loadCategories() {
-            fetch('static/categories.json')
-                .then(response => response.json())
-                .then(data => {
-                    categoryList.innerHTML = '';
-                    data.categories.forEach(category => {
-                        const li = document.createElement('li');
-                        li.textContent = category.name;
-                        categoryList.appendChild(li);
+            
+            function loadCategories() {
+                fetch('static/categories.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        categoryList.innerHTML = '';
+                        data.categories.forEach(category => {
+                            const li = document.createElement('li');
+                            li.textContent = category.name;
+                            categoryList.appendChild(li);
+                        });
                     });
+            }
+            
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    settingsModal.style.display = 'flex';
+                    loadNotifications();
+                    loadMessages();
                 });
-        }
-        
-        if (settingsBtn) {
-            settingsBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                settingsModal.style.display = 'flex';
-                loadNotifications();
-                loadMessages();
-            });
-        }
-        
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', function() {
-                settingsModal.style.display = 'none';
-            });
-        }
-        
-        if (saveProfileBtn) {
-            saveProfileBtn.addEventListener('click', function() {
-                const name = profileNameInput.value;
-                const email = profileEmailInput.value;
-                localStorage.setItem('profileName', name);
-                localStorage.setItem('profileEmail', email);
-                if (profilePhotoInput.files.length > 0) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const photoDataUrl = e.target.result;
-                        localStorage.setItem('profilePhoto', photoDataUrl);
-                        profileImg.src = photoDataUrl;
+            }
+            
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', function() {
+                    settingsModal.style.display = 'none';
+                });
+            }
+            
+            if (saveProfileBtn) {
+                saveProfileBtn.addEventListener('click', function() {
+                    const name = profileNameInput.value;
+                    const email = profileEmailInput.value;
+                    localStorage.setItem('profileName', name);
+                    localStorage.setItem('profileEmail', email);
+                    if (profilePhotoInput.files.length > 0) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const photoDataUrl = e.target.result;
+                            localStorage.setItem('profilePhoto', photoDataUrl);
+                            profileImg.src = photoDataUrl;
+                            alert('Profil berhasil diperbarui!');
+                        };
+                        reader.readAsDataURL(profilePhotoInput.files[0]);
+                    } else {
                         alert('Profil berhasil diperbarui!');
-                    };
-                    reader.readAsDataURL(profilePhotoInput.files[0]);
-                } else {
-                    alert('Profil berhasil diperbarui!');
-                }
-            });
-        }
-        
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.clear();
-                alert('Anda telah berhasil logout.');
-                window.location.href = 'https://www.google.com/';
-            });
-        }
-        
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        if (isDarkMode) {
-            body.classList.add('dark-mode');
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
-        });
-        
-        function loadNotifications() {
-            const notifList = document.getElementById('notification-list');
-            notifList.innerHTML = '';
-            fetch('/get-notifications')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.notifications.length === 0) {
-                        notifList.innerHTML = '<li class="notification-item">Tidak ada notifikasi baru.</li>';
-                        return;
                     }
-                    data.notifications.forEach(notif => {
-                        const li = document.createElement('li');
-                        li.classList.add('notification-item');
-                        li.innerHTML = `<p class="notification-text">${notif.text}</p>`;
-                        notifList.appendChild(li);
-                    });
-                })
-                .catch(error => {
-                    console.error('Gagal memuat notifikasi:', error);
-                    notifList.innerHTML = '<li class="notification-item">Gagal memuat notifikasi.</li>';
                 });
-        }
-        
-        function loadMessages() {
-            const pesanList = document.getElementById('message-list');
-            pesanList.innerHTML = '';
-            fetch('/get-messages')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.messages.length === 0) {
-                        pesanList.innerHTML = '<li class="message-item">Tidak ada pesan baru.</li>';
-                        return;
-                    }
-                    data.messages.forEach(pesan => {
-                        const li = document.createElement('li');
-                        li.classList.add('message-item');
-                        li.innerHTML = `<p class="message-text"><strong>${pesan.from || 'Admin'}:</strong> ${pesan.text}</p>`;
-                        pesanList.appendChild(li);
-                    });
-                })
-                .catch(error => {
-                    console.error('Gagal memuat pesan:', error);
-                    pesanList.innerHTML = '<li class="message-item">Gagal memuat pesan.</li>';
-                });
-        }
-        
-        if (closeGalleryModalBtn) {
-            closeGalleryModalBtn.addEventListener('click', function() {
-                savedGalleryModal.style.display = 'none';
-            });
-        }
-        
-        function displaySavedImages() {
-            const savedGalleryContainer = document.getElementById('saved-gallery-container');
-            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-            savedGalleryContainer.innerHTML = '';
-            if (savedImages.length === 0) {
-                savedGalleryContainer.innerHTML = '<p style="text-align: center;">Tidak ada gambar yang disimpan.</p>';
-                return;
             }
-            savedImages.forEach(image => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                const img = document.createElement('img');
-                img.src = image.src;
-                img.alt = image.title;
-                card.appendChild(img);
-                savedGalleryContainer.appendChild(card);
+            
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.clear();
+                    alert('Anda telah berhasil logout.');
+                    window.location.href = 'https://www.google.com/';
+                });
+            }
+            
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            }
+            
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
             });
-        }
-        
-        if (collectionBtn) {
-            collectionBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                displaySavedImages();
-                savedGalleryModal.style.display = 'flex';
-            });
-        }
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const category = this.textContent.toLowerCase();
-                navItems.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                let filteredImages = [];
-                let filteredVideos = [];
-
-                if (category === 'semua') {
-                    filteredImages = allImages;
-                    filteredVideos = allVideos;
-                } else {
-                    filteredImages = allImages.filter(image => image.category.toLowerCase() === category);
-                    filteredVideos = allVideos.filter(video => video.category.toLowerCase() === category);
+            
+            function loadNotifications() {
+                const notifList = document.getElementById('notification-list');
+                notifList.innerHTML = '';
+                fetch('/get-notifications')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.notifications.length === 0) {
+                            notifList.innerHTML = '<li class="notification-item">Tidak ada notifikasi baru.</li>';
+                            return;
+                        }
+                        data.notifications.forEach(notif => {
+                            const li = document.createElement('li');
+                            li.classList.add('notification-item');
+                            li.innerHTML = `<p class="notification-text">${notif.text}</p>`;
+                            notifList.appendChild(li);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Gagal memuat notifikasi:', error);
+                        notifList.innerHTML = '<li class="notification-item">Gagal memuat notifikasi.</li>';
+                    });
+            }
+            
+            function loadMessages() {
+                const pesanList = document.getElementById('message-list');
+                pesanList.innerHTML = '';
+                fetch('/get-messages')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.messages.length === 0) {
+                            pesanList.innerHTML = '<li class="message-item">Tidak ada pesan baru.</li>';
+                            return;
+                        }
+                        data.messages.forEach(pesan => {
+                            const li = document.createElement('li');
+                            li.classList.add('message-item');
+                            li.innerHTML = `<p class="message-text"><strong>${pesan.from || 'Admin'}:</strong> ${pesan.text}</p>`;
+                            pesanList.appendChild(li);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Gagal memuat pesan:', error);
+                        pesanList.innerHTML = '<li class="message-item">Gagal memuat pesan.</li>';
+                    });
+            }
+            
+            if (closeGalleryModalBtn) {
+                closeGalleryModalBtn.addEventListener('click', function() {
+                    savedGalleryModal.style.display = 'none';
+                });
+            }
+            
+            function displaySavedImages() {
+                const savedGalleryContainer = document.getElementById('saved-gallery-container');
+                const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                savedGalleryContainer.innerHTML = '';
+                if (savedImages.length === 0) {
+                    savedGalleryContainer.innerHTML = '<p style="text-align: center;">Tidak ada gambar yang disimpan.</p>';
+                    return;
                 }
-                
-                displayImages(filteredImages);
-                displayVideos(filteredVideos);
-            });
-        });
-        
-        if (leftScrollBtn) {
-            leftScrollBtn.addEventListener('click', () => {
-                scrollingNavContainer.scrollBy({ left: -200, behavior: 'smooth' });
-            });
-        }
-        if (rightScrollBtn) {
-            rightScrollBtn.addEventListener('click', () => {
-                scrollingNavContainer.scrollBy({ left: 200, behavior: 'smooth' });
-            });
-        }
-        
-        const loginFacebookBtn = document.querySelector('.dropdown-item.social-login.fb');
-        const loginInstagramBtn = document.querySelector('.dropdown-item.social-login.ig');
+                savedImages.forEach(image => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    const img = document.createElement('img');
+                    img.src = image.src;
+                    img.alt = image.title;
+                    img.setAttribute('loading', 'lazy'); // Lazy loading untuk gambar tersimpan
+                    img.setAttribute('width', '500'); // Atur lebar default
+                    img.setAttribute('height', 'auto'); // Atur tinggi default
+                    card.appendChild(img);
+                    savedGalleryContainer.appendChild(card);
+                });
+            }
+            
+            if (collectionBtn) {
+                collectionBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    displaySavedImages();
+                    savedGalleryModal.style.display = 'flex';
+                });
+            }
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.textContent.toLowerCase();
+                    navItems.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    let filteredImages = [];
+                    let filteredVideos = [];
 
-        if (loginFacebookBtn) {
-            loginFacebookBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Login Facebook Dulu Gan');
-                window.location.href = 'https://www.facebook.com/accounts/login/';
+                    if (category === 'semua') {
+                        filteredImages = allImages;
+                        filteredVideos = allVideos;
+                    } else {
+                        filteredImages = allImages.filter(image => image.category.toLowerCase() === category);
+                        filteredVideos = allVideos.filter(video => video.category.toLowerCase() === category);
+                    }
+                    
+                    displayImages(filteredImages);
+                    displayVideos(filteredVideos);
+                });
             });
-        }
-        if (loginInstagramBtn) {
-            loginInstagramBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert ('Login Ig Bosskuu');
-                window.location.href = 'https://www.instagram.com/accounts/login/';
-            });
-        }
-    });
-</script>
+            
+            if (leftScrollBtn) {
+                leftScrollBtn.addEventListener('click', () => {
+                    scrollingNavContainer.scrollBy({ left: -200, behavior: 'smooth' });
+                });
+            }
+            if (rightScrollBtn) {
+                rightScrollBtn.addEventListener('click', () => {
+                    scrollingNavContainer.scrollBy({ left: 200, behavior: 'smooth' });
+                });
+            }
+            
+            if (loginFacebookBtn) {
+                loginFacebookBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Login Facebook Dulu Gan');
+                    window.location.href = 'https://www.facebook.com/accounts/login/';
+                });
+            }
+            if (loginInstagramBtn) {
+                loginInstagramBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert ('Login Ig Bosskuu');
+                    window.location.href = 'https://www.instagram.com/accounts/login/';
+                });
+            }
+        });
+    </script>
     
 </body>
 </html>
