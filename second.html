@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="static/images/logo_head.png">
+    <title id="page-title">Whyd1</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding-bottom: 70px;
+        }
+        
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .container.dark-mode {
+            background-color: #1a1a1a;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .dark-mode #content-title, .dark-mode .profile-name, .dark-mode .related-content-title, .dark-mode .action-icon, .dark-mode .modal-content, .dark-mode .modal-content h2, .dark-mode .modal-content p, .dark-mode .modal-content input, .dark-mode .modal-content button {
+            color: #e0e0e0;
+            background-color: transparent;
+            border-color: #444;
+        }
+        .dark-mode .action-icon svg {
+            fill: #e0e0e0;
+        }
+        .dark-mode .profile-pic {
+            background-color: transparent;
+        }
+        .dark-mode .modal-content a {
+            color: #e0e0e0;
+            border-bottom: 1px solid #444;
+        }
+        .dark-mode .modal-content input {
+            background-color: #444;
+            color: #e0e0e0;
+            border: 1px solid #555;
+        }
+	@font-face {
+  	   font-family: 'January Night'; 
+  	   src: url('/static/fonts/January Night.ttf') format('truetype'); 
+  	   font-weight: normal;
+  	   font-style: italic;
+	}
+	h1, h2, h3, h4, h5, h6, h7, p, a {
+	   font-family: 'January Night';
+	}
+        /* Header and Media */
+        .header {
+            position: relative;
+        }
+        #content-media, #content-media-video, #content-media-audio {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        
+        /* Back Button */
+        .back-button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .back-button {
+	   font-family: 'January Night';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            z-index: 10;
+        }
+        
+        /* Action Bar */
+        .actions-bar {
+            padding: 16px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .actions-left {
+            display: flex;
+            gap: 20px;
+        }
+        .action-icon {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #555;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .action-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .save-button {
+	    font-family: 'January Night';
+            background-color: #d11a2a;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        /* Profile and Title */
+        .profile-info {
+            padding: 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .profile-pic img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+        .profile-name {
+	    font-family: 'January Night';
+            font-weight: bold;
+            font-size: 18px;
+        }
+        #content-title {
+            padding: 0 0 16px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+            margin: 0;
+        }
+        
+        /* Related Content */
+        .related-content-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            margin: 0 0 12px;
+        }
+        #related-content-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .related-item-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .related-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .related-item img, .related-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .time-label {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 2;
+        }
+        
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            z-index: 1000;
+        }
+        .footer-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            color: #555;
+        }
+        .footer-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        .profile-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Dark Mode Footer */
+        body.dark-mode .footer {
+            background-color: #2a2a2a;
+            border-top: 1px solid #444;
+        }
+        body.dark-mode .footer-icon {
+            color: #e0e0e0;
+        }
+        body.dark-mode .footer-icon svg {
+            fill: #e0e0e0;
+        }
+        
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        .modal-content a, .modal-content button {
+            display: block;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-align: center;
+            width: 100%;
+        }
+        .modal-content button {
+            background-color: #d11a2a;
+            color: #fff;
+            border-radius: 20px;
+            font-weight: bold;
+            border: none;
+            padding: 10px;
+        }
+        #comment-input, #search-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .comment-list, .notification-list, .search-results {
+            text-align: left;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .comment-item, .notification-item, .search-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .comment-author, .notification-sender {
+            font-weight: bold;
+        }
+
+        /* Search Bar Specific Styles */
+        #search-modal .modal-content {
+            margin: 20px auto;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.30); 
+        }
+        #search-modal .modal-content input {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgba(255,255,255,0.9);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        .dark-mode #search-modal .modal-content input {
+	    background-color: rgba(30,30,30,0.55);
+	    color: #ddd;
+	}
+        #search-modal .modal-content h2 {
+            display: none;
+        }
+        .search-results a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .search-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.30);
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .dark-mode .search-item {
+            background-color: #444;
+        }
+        .search-item img, .search-item video {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .search-item-info {
+            flex-grow: 1;
+        }
+        .search-item-title {
+            font-weight: bold;
+            margin: 0;
+        }
+        .search-item-category {
+            color: #555;
+            font-size: 12px;
+            margin: 0;
+        }
+        .action-icon svg.liked {
+	    fill: #d11a2a; /* Warna merah */
+	}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="back-button-container">
+            <a href="#" class="back-button" onclick="history.back()">&#x2190;</a>
+        </div>
+        <img id="content-media" style="display: none;">
+        <video id="content-media-video" controls style="display: none;"></video>
+        <audio id="content-media-audio" controls style="display: none;"></audio>
+    </div>
+
+    <div class="actions-bar">
+        <div class="actions-left">
+            <a href="#" class="action-icon" id="like-button">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5A5.5 5.5 0 017.5 3c2.25 0 4.08 1.45 5 3.51.92-2.06 2.75-3.51 5-3.51A5.5 5.5 0 0122 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> <span id="like-count"></span>
+            </a>
+            <a href="#" class="action-icon" id="comment-button">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 4H6v-2h8v2zm4-4H6V5h12v4z"/></svg>
+            </a>
+            <a href="#" class="action-icon" id="share-button">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 8l4-4V2H3v2l4 4-4 4v2h21v-2l-4-4z"/></svg>
+            </a>
+            <a href="#" class="action-icon" id="more-options-button">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            </a>
+        </div>
+        <a href="#" class="save-button" id="save-button">Simpan</a>
+    </div>
+
+    <div class="profile-info">
+        <div class="profile-pic"><img src="static/images/profile.png"></div>
+        <span class="profile-name">Whyd1</span>
+    </div>
+    <h1 id="content-title"></h1>
+
+    <hr>
+    <div class="related-content-section">
+        <h2 class="related-content-title">Rekomendasi Lainya: <a href="musik.html" style="text-decoration: none;">𝒑𝒍𝒂𝒚𝒍𝒊𝒔𝒕♪ ༘⋆</a></h2>
+        <div id="related-content-container"></div>
+    </div>
+</div>
+
+<div class="footer">
+    <a href="/" class="footer-icon">
+        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+    </a>
+    <a href="#" class="footer-icon" id="search-button">
+        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-7-8a7 7 0 1114 0 7 7 0 01-14 0z" clip-rule="evenodd"></path></svg>
+    </a>
+    <a href="#" class="footer-icon" id="messages-button">
+        <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
+    </a>
+    <a href="#" class="footer-icon" id="profile-button">
+        <img src="static/images/profile.png" alt="Profil" class="profile-thumb">
+    </a>
+</div>
+
+<div id="more-options-modal" class="modal">
+    <div class="modal-content">
+        <p>Opsi Lainnya</p>
+        <a href="#" id="report-option">Laporkan konten</a>
+        <a href="#" id="hide-option">Sembunyikan</a>
+        <a href="#" id="copy-link-option">Salin tautan</a>
+    </div>
+</div>
+
+<div id="comment-modal" class="modal">
+    <div class="modal-content">
+        <h2>Komentar</h2>
+        <input type="text" id="comment-input" placeholder="Tulis komentar...">
+        <button id="send-comment-button">Kirim</button>
+        <div class="comment-list">
+            <div class="comment-item">
+                <p><strong class="comment-author">ItAchi:</strong> Amaterasu!</p>
+            </div>
+            <div class="comment-item">
+                <p><strong class="comment-author">SukaSukaAja:</strong> Komen Aja</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="messages-modal" class="modal">
+    <div class="modal-content">
+        <h2>Notifikasi & Pesan</h2>
+        <div class="notification-list">
+            <div class="notification-item">
+                <p><strong class="notification-sender">System:</strong> Hobby Baru Suka Ngotak Ngatik Kode.</p>
+            </div>
+            <div class="notification-item">
+                <a href="musik"><strong class="notification-sender">Naruto Uzumaki:</strong> Musik Dayo</a>
+            </div>
+            <div class="notification-item">
+                <p><strong class="notification-sender">Hinata Hyuga:</strong> Hanya Untuk Bersenang Senang🎉</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        <input type="text" id="search-input" placeholder="Cari...">
+        <div id="search-results" class="search-results"></div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const contentSrc = urlParams.get('src');
+    const contentTitle = document.getElementById('content-title');
+    const moreOptionsModal = document.getElementById('more-options-modal');
+    const commentModal = document.getElementById('comment-modal');
+    const messagesModal = document.getElementById('messages-modal');
+    const searchModal = document.getElementById('search-modal');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const likeButton = document.getElementById('like-button');
+    const likeCountElement = document.getElementById('like-count');
+    
+    let allContentData = [];
+
+    // --- Bagian baru: Data musik dari musik.html ---
+    const musicData = [
+        { id:"song-1", title: "Can You Fell My Heart", artist: "Bringme The Horizon", cover: "https://www.dropbox.com/scl/fi/052nkpaj7kqe21u16aozf/Can_You_Feel_My_Heart_poster.jpg?rlkey=9eyff4djc09qgteqsc3d1oxq3&st=2jk7rth0&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/mlqpg80bt4ftuam0zavo2/Bring-Me-The-Horizon-Can-You-Feel-My-Heart.mp3?rlkey=fqtd1balk00cwq8yp9mjvp9i9&st=txcxgh41&raw=1" },
+        { title: "Sempiternal", artist: "Bringme The Horizon", cover: "https://www.dropbox.com/scl/fi/yf0gt7l4e3g5q4ob03c0d/Sempiternal_poster.jpg?rlkey=kyuot2c0lzeyzbh8tdnnsqabf&st=ix8p9bxy&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/gvq616241pp6lne8h4vgv/Bring-Me-the-Horizon-Sempiternal.mp3?rlkey=2t5ocw9nw2by6h3dzdjf084fx&st=qnn16i0m&raw=1" },
+        { title: "Bleed Out", artist: "Within Temptation", cover: "https://www.dropbox.com/scl/fi/5oso3ua1qmtzu6lszsd9n/Bleed_Out_poster.jpg?rlkey=9hqf5emilmwo911ivle7ga42i&st=ov59uv7h&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/csid85jhgxkrdl3h8utyh/Within-Temptation-Bleed-Out.mp3?rlkey=0fp5pwg8eu8a9rg29av6ramch&st=f56wpkt1&raw=1" },
+        { title: "Lost In Paradise", artist: "Ali Feat Aklo", cover: "https://www.dropbox.com/scl/fi/jla1345z78s0mvlq9echn/Lost_In_Paradise_poster.jpg?rlkey=p7c6yjnuvfxiwa1vna34zdj0u&st=yj6r9gm2&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/kmn0ppxw5ppnqgozbhdsx/Ali-feat-Aklo-Lost-In-Paradise.mp3?rlkey=j50p9ur2fmitsqw5xahvmjr23&st=k9n09oea&raw=1" },
+        { title: "KingsBlood", artist: "KALA", cover: "https://www.dropbox.com/scl/fi/fbv25b2gmg2rh2gzg3abq/KINGSBLOOD_poster.jpg?rlkey=xb1ereat3effaegphkj9mpi85&st=5dxjt0nb&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/a3ta699vzjubjn7zpz289/KALA-KINGSBLOOD.mp3?rlkey=nxkosarj7elq8drbbrybdg9fb&st=uy46bv25&raw=1" },
+        { title: "Literature", artist: "Reina Ueda", cover: "https://www.dropbox.com/scl/fi/lyurcqwf3b7ndmhp8lcw7/Literature_poster.jpg?rlkey=kaanr95vbxsszq0q1c7wepq9h&st=cndjy4gt&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/k77e4kjjxy8ngvo6jk310/Reina-Ueda-Literature.mp3?rlkey=eqf4aqg7sjhtv7yogh7sj9tzv&st=yeys34eq&raw=1" },
+        { title: "Stay With Me", artist: "Miki Matsubara", cover: "https://www.dropbox.com/scl/fi/6rjilpazh9nw5kt7uy377/Stay_With_Me_poster.jpg?rlkey=tmfcdy4oockuitfn865p9htba&st=h4am0z28&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/v3h62rsts1cypcxkrjte2/Miki-Matsubara-Stay-With-Me.mp3?rlkey=l828f4ybn52dg6htnahj4a13y&st=lhsfc7hf&raw=1" },
+        { title: "Bang Bang Born", artist: "Creepy Nuts", cover: "https://www.dropbox.com/scl/fi/gnx25em0adsp0istlysl3/Bang_Bang_Born_poster.jpg?rlkey=sfoc7crb0v3b1nvntc8d7q8y4&st=yf8s1yuz&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/0h724yvyl1c2qsvfv8ab6/Creepy-Nuts-Bang-Bang-Born.mp3?rlkey=qoohoj1pv7peefybui5ylswl5&st=98o16ys1&raw=1" },
+        { title: "Hikigane", artist: "Goodbye Setsuna", cover: "https://www.dropbox.com/scl/fi/3vo5ed28ivml7hbx5iz9r/Hikigane_poster.jpg?rlkey=w34wyh65gs26l1somxbrouvf7&st=26a5vtvs&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/uclv400m77pg6hd6mjw9g/Goodbyee-Setsuna-Hikigane.mp3?rlkey=ajnomit2h08ieq3ie221tsvu0&st=w0yfxflo&raw=1" },
+        { title: "Tower Of Flower", artist: "Sayuri", cover: "https://www.dropbox.com/scl/fi/hntmme2sxcowju8x3p8uq/Tower_Of_Flower_poster.jpg?rlkey=eghmmhnb5yj0x1gwhu2nejvn6&st=mc6bij6r&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/ozznhrkiuofilqbbirdxp/Sayuri-Tower-Of-Flower.mp3?rlkey=h31stnepnjn87rec6jeaukog5&st=2dw4dygn&raw=1" },
+        { title: "GodKnows", artist: "Aya Hirano", cover: "https://www.dropbox.com/scl/fi/plkpzhl5seawvgsiedms9/Godknows_poster.jpg?rlkey=48ju7dg88jeqc9clrksj2ywf2&st=dug11jrw&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/dfejknjob081xcp28oxjx/Aya-Hirano-Godknows.mp3?rlkey=zpz0hblp4d7my65m9kwlpqsqq&st=0dfeoadr&raw=1" },
+        { title: "Skyfall", artist: "Attack On Titan Version", cover: "https://www.dropbox.com/scl/fi/8oh6b6mir3pycrtx4l7fw/Skyfall_poster.jpg?rlkey=80nzome7e2mt3k1hhhmr1i0km&st=dbl336iy&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/94eanr9jlhdubhj9zj5rr/Attack-on-Titan-Skyfall.mp3?rlkey=7gnohud05zzg9s7rpsmzfniwo&st=ou6ihneh&raw=1" },
+        { title: "Call Your Name", artist: "Attack On Titan Ost", cover: "https://www.dropbox.com/scl/fi/jvkcys8arxo4gylfblj1s/Call_your_name_poster.jpg?rlkey=x6fx8hz4wmyxt9a0dpymkst4g&st=5qna2ic8&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/p6xliyrnm9yov127t9i0o/Attack-on-Titan-OST-Call-your-name.mp3?rlkey=cat154nmq35rf5252s1dg9wb5&st=8oehar32&raw=1" },
+        { title: "BlueBird", artist: "Ikimono Gakari", cover: "https://www.dropbox.com/scl/fi/r9vnlt2g4sydteg304epl/Bluebird_poster.jpg?rlkey=cil12pz3kpv9tuia2v826eh6u&st=nernj7r4&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/h7i4po8s81xh0wl1h75k0/Ikimono-Gakari-Bluebird.mp3?rlkey=b3rljbnp8vgc3l05ugvx9zb39&st=q1w027bo&raw=1" },
+        { title: "Kanashimi", artist: "Litle By Litle", cover: "static/naruto/narutokun.jpeg", category: "Musik", src: "https://www.dropbox.com/scl/fi/vs3sznwjcwkgz0oumc31v/Litle-By-Litle-Kanashimi.mp3?rlkey=nut3ff1g6spe23cro3w2h5btj&st=m0l6769y&raw=1" },
+        { title: "Sunny", artist: "Yourushika", cover: "https://www.dropbox.com/scl/fi/2up82fljihxqr1q7hmwwm/Sunny_poster.jpg?rlkey=0ruhsdq6q7x8o0lr1r10a4cld&st=vfzg7wxz&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/2ea1dcgeeuvlnh44d6nvn/Yorushika-Sunny.mp3?rlkey=fjr17964k1hdm4w06y6d487fy&st=l54axjjd&raw=1" },
+        { title: "Martian", artist: "Yourushika", cover: "https://www.dropbox.com/scl/fi/0yvffvm67si5v7spb2ho2/Martian_poster.jpg?rlkey=k9wek624131z8p2cv8b3340z5&st=8mwrcp36&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/zglg2ip8lo4uyno7f24mv/Yorushika-Martian.mp3?rlkey=tn7jk4zr5akrjqx86cn9dy0a4&st=bsgkpr6a&raw=1" },
+        { title: "Gurenge", artist: "Lisa", cover: "https://www.dropbox.com/scl/fi/isnwlmpwdspz0u5s8ght4/Gurenge_poster.jpg?rlkey=vnqf8i7y6w1kk1f00i9nfeykj&st=ha50qdr9&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/ds3ugeisa5bklovmouaic/LISA-Gurenge.mp3?rlkey=9ybhj5uup6yy6mpzbh6dez3sa&st=a83wtuz5&raw=1" },
+        { title: "Nezuko No Uta", artist: "Nami Nakagawa", cover: "https://www.dropbox.com/scl/fi/uarxf5s2cm6eaicf4ss89/Nezuko_No_Uta_poster.jpg?rlkey=56qi3q59w521cwbrbga9bbqoi&st=3rmflhu5&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/2wxlpdhfewgfv3vinufg9/Go-Shina-Nezuko-No-uta.mp3?rlkey=ks9di45nsigzznf2ozwza5cm1&st=wli4qgb2&raw=1" },
+        { title: "Tanjiro No Uta", artist: "Nami Nakagawa", cover: "https://www.dropbox.com/scl/fi/0sfynm3bwccx5vvdicvh8/Tanjiro_No_Uta_poster.jpg?rlkey=7v52jrv0l4ig4t8xvn2b6d975&st=hd2jupwi&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/l8anm4rzifqcc8w23tqfk/Nami-Nakagawa-Tanjiro-No-Uta.mp3?rlkey=of5jsqsmt33x56sxegvpaxc7w&st=4czptpo1&raw=1" },
+        { title: "ODD FUTURE", artist: "Unknown", cover: "https://www.dropbox.com/scl/fi/us320rfs3qcmhof9iiubj/ODD_FUTURE_poster.jpg?rlkey=t9rjfpqsptp84d3iyq15mve2d&st=45myoscb&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/sa9lmegz4p1o82nzqlwfs/ODD-FUTURE.mp3?rlkey=qkq48q9v2977zo58lrfgoaqnx&st=8s11yvyv&raw=1" },
+        { title: "Idol", artist: "Yoasobi", cover: "https://www.dropbox.com/scl/fi/r6gjyepdigath2vj9xp9n/Idol_poster.jpg?rlkey=m78zccy70syqruwwdq9dd3i16&st=uj41e3q3&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/c6a6827telwpf8tnxw53n/YOASOBI-Idol.mp3?rlkey=6t30loh9j74to3o8i1f9esor7&st=9uufzgyu&raw=1" },
+        { title: "Unravel", artist: "Toru Kitajima", cover: "https://www.dropbox.com/scl/fi/cb3o0p3y6db61jyktcuu2/Unravel_poster.jpg?rlkey=v7y9izojufvnd33fram364z6v&st=l3bk4hrr&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/jx1v0hn2jfzsv5glxh8z0/Toru-Kitajima-Unravel.mp3?rlkey=n6knfkqf5lfarucled6pyr4ip&st=6kp9s9wb&raw=1" },
+        { title: "After The Dark", artist: "Sweather Weather", cover: "https://www.dropbox.com/scl/fi/8wasjznx14z81blnfulhk/After_The_Dark_poster.jpg?rlkey=hga1396paugifrloq5ahvv0sd&st=hoj3fdwu&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/pt0qwoc77c5whl6umm9ty/Sweater-Weather-After-The-Dark.mp3?rlkey=w62t3mn6p3iv41f8hdu45yus3&st=fi83pnsi&raw=1" },
+        { title: "Stay Alife", artist: "Unknown", cover: "https://www.dropbox.com/scl/fi/gmyqybiqynmqkzfyo392a/Stay_Alive_poster.jpg?rlkey=52jdeiwvz5w87wf23tm0rk1kq&st=xm4udrge&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/epj64bbb112prra9q9ma3/Stay-Alive.mp3?rlkey=3s3ls1cx102xac4vdi0ph59dw&st=fqor05f3&raw=1" },
+        { title: "Cruel Night", artist: "Lisa", cover: "https://www.dropbox.com/scl/fi/r93689m4niznciotbhakw/Shine_in_the_Cruel_Night_poster.jpg?rlkey=44krkm456sf9lqhlv5xzp5tdq&st=f7v4eu51&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/blyay0tlz5nxf002cg9om/LISA-Shine-in-the-Cruel-Night.mp3?rlkey=dga4ymssc5qbyhm1tey70sgfq&st=d7g8tsc8&raw=1" },
+        { title: "Koi No Uta", artist: "Unknown", cover: "https://www.dropbox.com/scl/fi/2mrdoz2clmf34jd7xwu05/Koino_Uta_poster.jpg?rlkey=xmcb9horyel9l9w7zhj2n45mv&st=tvfusfe0&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/8k2xee0k7q9aiinigyyi2/Koino_Uta.mp3?rlkey=mi3isir9rrqqpak02mkjjptyh&st=xbmyk204&raw=1" },
+        { title: "Shinsho Wo Sasageyo", artist: "Linked Horizon", cover: "https://www.dropbox.com/scl/fi/jg3jlfeswnyxdaw3ddjle/sasageyo_poster.jpg?rlkey=7i88zixrlhgoz78o4dk13nzlo&st=ho1la78z&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/8o4iruyu3382pqpqnajb0/sasageyo.mp3?rlkey=78rx44fyoxncuc30lgrjrgjzx&st=6rt2txnc&raw=1" },
+        { title: "Paradisus-Paradoxum", artist: "Myth & Roid", cover: "https://www.dropbox.com/scl/fi/bjj2nj2rsytrtu2oxgsvf/Paradoxum_poster.jpg?rlkey=098mkoazfiq382mearrp3xfyf&st=ph93buf2&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/j137lliy1smrmag0ve0cy/MYTH-ROID-Paradoxum.mp3?rlkey=473gr5t7a88qv55xuax7u022n&st=tjyrgi5g&raw=1" },
+        { title: "Styx Helix", artist: "Myth & Roid", cover: "https://www.dropbox.com/scl/fi/n17ec5j39mu9x8zsbtwkr/STYX_HELIX_poster.jpg?rlkey=p6lzawzfsxizib968x8w37uqp&st=vnr8cyzc&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/5s4kv2xfhn7fpo5p50eby/MYTH-ROID-STYX_HELIX.mp3?rlkey=il2fyxxaxn8uiw85easuy4okq&st=rl9yfmc2&raw=1" },
+        { title: "Suzume", artist: "Toaka", cover: "https://www.dropbox.com/scl/fi/ifofgzp82ks4t46ilkz8n/Suzume_poster.jpg?rlkey=k34ze36ymfr2yg8ku0t8et41z&st=uys2h46p&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/1q9byvaovokgx7atu41fn/Toaka-Suzume.mp3?rlkey=6yzyaapxllbzwk6exnwgxyi02&st=vaxe2pck&raw=1" },
+        { title: "Sign", artist: "Flow", cover: "https://www.dropbox.com/scl/fi/uxm2uc47o6k49hp530tol/Flow_poster.jpeg?rlkey=cdesdqhco7jgwg808sz5mph7c&st=jtu0yc1s&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/uvnt3fu96h3z83s5u2c00/FLOW-Sign.mp3?rlkey=5v3k1adhuzy60q3n6nxxjvphh&st=y1i0i6a3&raw=1" },
+        { title: "Moshimo - Op12", artist: "Daisuke", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=ntq9vxbee1ifbgsbegx1aeqnq&st=hzcnc71q&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/4oyf7wxcm3rf30efqobrt/Naruto-Op-Opening-12.mp3?rlkey=ohseqr4rueoupze3ywxyrkg2e&st=90k8evpn&dl=1" },
+        { title: "Hero's Come Back", artist: "Naruto Op 1", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=ntq9vxbee1ifbgsbegx1aeqnq&st=jkasknzv&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/2r5pem7twjmojttb2mi9b/Naruto-Opening-1-Hero-s-Come-Back.mp3?rlkey=dyh5dsbqtyieb2gb4z67h4evp&st=jkasknzv&raw=1" },
+        { title: "A World", artist: "Naruto Op 7", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=vljd4n1y9guy3qr2ev3m54y65&st=hmcv0yzy&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/bruk2bxp8qa3ny8qjgk3c/Naruto-Opening-7-A-World-That-Was-Transparent.mp3?rlkey=vljd4n1y9guy3qr2ev3m54y65&st=hmcv0yzy&raw=1" },
+        { title: "City Lights", artist: "Flow", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=pg6s93tyersn1optqnl7kwlq1&st=wrrzdfah&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/0c2w9rurqjj5m6qe2b7aw/Naruto-AMV-The-Way-Of-Hokage.mp3?rlkey=pg6s93tyersn1optqnl7kwlq1&st=wrrzdfah&raw=1" },
+        { title: "Alive", artist: "Naruto Ending 4", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn50ykqmbxcgo4sm/Naruto_Musik_poster-1.png?rlkey=k2nv3skhn00c2ykqmbxcgo4sm&st=dl4d56po&raw=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/19xx9ebnbwpkg2rz3ax59/Naruto-Ending-4-Alive.mp3?rlkey=k2nv3skhn00c0ykqmbxcgo4sm&st=dl4d56po&raw=1" },
+        { title: "Tacica", artist: "New Songs", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=8a9p4i2rkblt6snn55odgrmnz&st=6h27ij6y&raw=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/g01fsk41u20jn9e8c8bz5/tacica-Newsong.mp3?rlkey=8a9p4i2rkblt6snn55odgrmnz&st=6h27ij6y&raw=1" },
+        { title: "Silhouette", artist: "Kana Boon", cover: "https://www.dropbox.com/scl/fi/uqtnvudei4yn5071lzmyc/Naruto_Musik_poster-1.png?rlkey=l9jph2ev5fqftk1o0ebsny5l3&st=vknzn4xx&raw=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/g726czyvhyuz0se8iaccz/KANA-BOON-Silhouette.mp3?rlkey=l9jph2ev5fqftk1o0ebsny5l3&st=vknzn4xx&raw=1" },
+        { title: "Ame Wo Matsu", artist: "Minami", cover: "https://www.dropbox.com/scl/fi/z5lwrw53mu1570u0uwyaa/amewomatsu_cover.jpeg?rlkey=7wzsacyb9aw4jstg4c02wo8a8&st=6ylrzzwl&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/by8tgngsefgf9n36zl7do/Ame-Wo-Matsu-TFALdg7HUJU.mp3?rlkey=ulq0khitoj2tw57yrndnvuvfh&st=i4cphv5v&raw=1" },
+        { title: "Hail To The King", artist: "Avenged Sevenfold", cover: "https://www.dropbox.com/scl/fi/t21vehee0ojh0t20zrdhx/HailToTheKing_poster.jpeg?rlkey=kxfh8m77f3myvynkj67gt3ifb&st=5zrslg3i&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/dwmp1s0m8l41ds6nvplai/Hail-to-the-King-MjwttGizNEs.mp3?rlkey=57b10rmv4xsamouc13257liue&st=phaa15x4&raw=1" },
+        { title: "Hunting Soul", artist: "DanDaDan OST", cover:"https://www.dropbox.com/scl/fi/q5cm0nwj8nzj0r7jc643l/DanDaDan_poster-1.webp?rlkey=53wp3ni9tgx8i77hh9w1gh0yu&st=0g1gw8et&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/7e5ba78ptnc3z88z55ays/Hunting-Soul-K4hNyARBf28.mp3?rlkey=0dqbc0465ijm5ipe5q6jasxp4&st=s4qu7key&raw=1" },
+        { title: "Hey Kids", artist: "The Oral Cigarettes", cover: "https://www.dropbox.com/scl/fi/0j6fmh5mw2x6l9vn2rw20/Heykids_poster.jpeg?rlkey=73m6bur7pe1nhzlzrzsdbxwn1&st=4cubbuq9&dl=1", category: "Musik", src: "https://www.dropbox.com/scl/fi/2zqrh37kuor1pknwtnnz5/Hey-Kids-skilutORMZM.mp3?rlkey=64y9tter3x2w78n73c64tmxnq&st=rr52xzdl&raw=1" }
+    ];
+    // --- Akhir bagian baru ---
+
+    // Fungsionalitas Tombol-tombol Utama
+    likeButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const likeIcon = likeButton.querySelector('svg');
+        const isLiked = likeIcon.classList.toggle('liked');
+        let currentLikes = parseInt(likeCountElement.textContent);
+        
+        if (isLiked) {
+            currentLikes++;
+            alert(`Anda menyukai konten ini!`);
+        } else {
+            currentLikes--;
+            alert(`Anda membatalkan suka pada konten ini.`);
+        }
+        likeCountElement.textContent = currentLikes;
+
+        const currentContent = allContentData.find(item => item.src === contentSrc);
+        if (currentContent) {
+            localStorage.setItem(`likes_${currentContent.id}`, currentLikes);
+            localStorage.setItem(`isLiked_${currentContent.id}`, isLiked);
+        }
+    });
+
+    // Cek status like saat halaman dimuat
+    function checkLikeStatus(contentId) {
+        const savedLikes = localStorage.getItem(`likes_${contentId}`);
+        const isLiked = localStorage.getItem(`isLiked_${contentId}`) === 'true';
+
+        if (isLiked) {
+            likeButton.querySelector('svg').classList.add('liked');
+        }
+        likeCountElement.textContent = savedLikes || 0;
+    }
+
+    document.getElementById('comment-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        commentModal.style.display = "block";
+    });
+
+    document.getElementById('send-comment-button').addEventListener('click', (e) => {
+        const commentInput = document.getElementById('comment-input');
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            const commentList = document.querySelector('.comment-list');
+            const newComment = document.createElement('div');
+            newComment.classList.add('comment-item');
+            newComment.innerHTML = `<p><strong class="comment-author">Anda:</strong> ${commentText}</p>`;
+            commentList.prepend(newComment);
+            commentInput.value = '';
+            alert('Komentar berhasil dikirim!');
+        } else {
+            alert('Komentar tidak boleh kosong.');
+        }
+    });
+
+    document.getElementById('share-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (navigator.share) {
+            navigator.share({
+                title: document.getElementById('page-title').textContent,
+                url: window.location.href
+            }).catch(console.error);
+        } else {
+            alert('Fitur berbagi tidak didukung di browser ini.');
+        }
+    });
+
+    document.getElementById('save-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        const contentToSave = allContentData.find(item => item.src === contentSrc);
+        if (contentToSave) {
+            let savedContent = JSON.parse(localStorage.getItem('savedImages')) || [];
+            const isAlreadySaved = savedContent.some(item => item.src === contentToSave.src);
+            if (!isAlreadySaved) {
+                savedContent.push(contentToSave);
+                localStorage.setItem('savedImages', JSON.stringify(savedContent));
+                alert('Konten berhasil disimpan!');
+            } else {
+                alert('Konten ini sudah pernah kamu simpan!');
+            }
+        }
+    });
+    
+    // Fungsionalitas More Options
+    document.getElementById('more-options-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        moreOptionsModal.style.display = "block";
+    });
+
+    document.getElementById('report-option').addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Konten telah dilaporkan. Terima kasih atas bantuannya.');
+        moreOptionsModal.style.display = "none";
+    });
+    
+    document.getElementById('hide-option').addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Konten ini akan disembunyikan dari feed Anda.');
+        moreOptionsModal.style.display = "none";
+    });
+
+    document.getElementById('copy-link-option').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+            alert('Tautan berhasil disalin!');
+        } catch (err) {
+            alert('Gagal menyalin tautan.');
+        }
+        moreOptionsModal.style.display = "none";
+    });
+
+    // Fungsionalitas Footer
+    document.getElementById('search-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        searchModal.style.display = "block";
+        document.getElementById('search-input').focus();
+    });
+    document.getElementById('messages-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        messagesModal.style.display = "block";
+    });
+    document.getElementById('profile-button').addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Menuju halaman profil.');
+    });
+    
+    // Menutup modal jika klik di luar area modal-content
+    window.addEventListener('click', (e) => {
+        if (e.target == moreOptionsModal) {
+            moreOptionsModal.style.display = "none";
+        }
+        if (e.target == commentModal) {
+            commentModal.style.display = "none";
+        }
+        if (e.target == messagesModal) {
+            messagesModal.style.display = "none";
+        }
+        if (e.target == searchModal) {
+            searchModal.style.display = "none";
+        }
+    });
+
+    // Toggle dark mode
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.textContent = '☠︎︎';
+    darkModeToggle.style.position = 'fixed';
+    darkModeToggle.style.bottom = '70px';
+    darkModeToggle.style.right = '20px';
+    darkModeToggle.style.padding = '10px';
+    darkModeToggle.style.borderRadius = '5px';
+    darkModeToggle.style.border = 'none';
+    darkModeToggle.style.cursor = 'pointer';
+    darkModeToggle.style.backgroundColor = 'transparent';
+    darkModeToggle.style.color = 'red';
+    document.body.appendChild(darkModeToggle);
+
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        document.querySelector('.container').classList.toggle('dark-mode');
+    });
+
+    // Load and merge content data
+    Promise.all([
+        fetch('static/images.json').then(res => res.json()).catch(() => ({ images: [] })),
+        fetch('static/videos.json').then(res => res.json()).catch(() => ({ videos: [] }))
+    ]).then(([imageData, videoData]) => {
+        // Menggabungkan data dari images.json, videos.json, dan musicData
+        allContentData = [...imageData.images, ...videoData.videos, ...musicData];
+
+        // Initial content load on page
+        const mainContent = allContentData.find(item => {
+            // Mengatasi masalah URL yang terenkode dengan benar
+            const decodedSrc = decodeURIComponent(contentSrc);
+            return item.src === decodedSrc;
+        });
+        
+        if (mainContent) {
+            document.getElementById('page-title').textContent = mainContent.title;
+            contentTitle.textContent = mainContent.title;
+            
+            // Perbaikan untuk memastikan id ada
+            const contentId = mainContent.id || mainContent.title.replace(/\s/g, '');
+            checkLikeStatus(contentId);
+            
+            // Logika baru untuk menangani video, audio, dan gambar
+            document.getElementById('content-media').style.display = 'none';
+            document.getElementById('content-media-video').style.display = 'none';
+            document.getElementById('content-media-audio').style.display = 'none';
+
+            const isVideo = mainContent.src.endsWith('.mp4');
+            const isAudio = mainContent.src.endsWith('.mp3');
+            let mainMediaElement;
+
+            if (isVideo) {
+                mainMediaElement = document.getElementById('content-media-video');
+                // Tampilkan jumlah likes yang disimpan jika ada
+                const savedLikes = localStorage.getItem(`likes_${mainContent.id}`);
+                likeCountElement.textContent = savedLikes ? parseInt(savedLikes) : mainContent.likes || 0;
+            } else if (isAudio) {
+                mainMediaElement = document.getElementById('content-media-audio');
+                // Tampilkan jumlah likes yang disimpan jika ada
+                const savedLikes = localStorage.getItem(`likes_${contentId}`);
+                likeCountElement.textContent = savedLikes ? parseInt(savedLikes) : mainContent.likes || 0;
+            } else {
+                mainMediaElement = document.getElementById('content-media');
+                // Tampilkan jumlah likes yang disimpan jika ada
+                const savedLikes = localStorage.getItem(`likes_${mainContent.id}`);
+                likeCountElement.textContent = savedLikes ? parseInt(savedLikes) : mainContent.likes || 0;
+            }
+            
+            if (mainMediaElement) {
+                mainMediaElement.src = mainContent.src;
+                mainMediaElement.style.display = 'block';
+            }
+
+            const relatedContainer = document.getElementById('related-content-container');
+            const relatedContent = allContentData.filter(item => 
+                item.category === mainContent.category && item.src !== mainContent.src
+            );
+
+            if (relatedContent.length > 0) {
+                relatedContent.forEach(item => {
+                    const isRelatedVideo = item.src.endsWith('.mp4');
+                    const isRelatedMusic = item.category === 'Musik';
+
+                    const link = document.createElement('a');
+                    link.href = `second.html?src=${encodeURIComponent(item.src)}`;
+                    link.classList.add('related-item-link');
+                    
+                    const itemWrapper = document.createElement('div');
+                    itemWrapper.classList.add('related-item');
+
+                    if (isRelatedVideo) {
+                        const video = document.createElement('video');
+                        video.src = item.src;
+                        video.muted = true;
+                        video.autoplay = true;
+                        video.loop = true;
+                        itemWrapper.appendChild(video);
+                    } else if (isRelatedMusic) {
+                        const img = document.createElement('img');
+                        img.src = item.cover;
+                        img.alt = item.title;
+                        itemWrapper.appendChild(img);
+                    } else {
+                        const img = document.createElement('img');
+                        img.src = item.src;
+                        img.alt = item.title;
+                        itemWrapper.appendChild(img);
+                    }
+                    
+                    link.appendChild(itemWrapper);
+                    relatedContainer.appendChild(link);
+                });
+            } else {
+                relatedContainer.innerHTML = '<p>Tidak ada konten terkait.</p>';
+            }
+        } else {
+            contentTitle.textContent = "Konten tidak ditemukan.";
+        }
+    }).catch(error => {
+        console.error("Gagal memuat konten:", error);
+        contentTitle.textContent = "Terjadi kesalahan saat memuat konten.";
+    });
+
+    // Fungsionalitas search
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        searchResults.innerHTML = '';
+        if (query.length > 0) {
+            const filteredContent = allContentData.filter(item => {
+                const searchableText = `${item.title || ''} ${item.artist || ''} ${item.category || ''}`.toLowerCase();
+                return searchableText.includes(query);
+            });
+            if (filteredContent.length > 0) {
+                filteredContent.forEach(item => {
+                    const isVideo = item.src.endsWith('.mp4');
+                    const isMusic = item.category === 'Musik';
+
+                    const itemLink = document.createElement('a');
+                    itemLink.href = `second?src=${encodeURIComponent(item.src)}`;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('search-item');
+                    
+                    let mediaElement;
+                    if (isMusic) {
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = item.cover;
+                        mediaElement.alt = item.title;
+                    } else if (isVideo) {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = item.src;
+                        mediaElement.autoplay = true;
+                        mediaElement.muted = true;
+                        mediaElement.loop = true;
+                    } else {
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = item.src;
+                        mediaElement.alt = item.title;
+                    }
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.classList.add('search-item-info');
+                    const titleP = document.createElement('p');
+                    titleP.classList.add('search-item-title');
+                    titleP.textContent = item.title;
+                    const categoryP = document.createElement('p');
+                    categoryP.classList.add('search-item-category');
+                    categoryP.textContent = isMusic ? item.artist : item.category;
+
+                    infoDiv.appendChild(titleP);
+                    infoDiv.appendChild(categoryP);
+                    itemDiv.appendChild(mediaElement);
+                    itemDiv.appendChild(infoDiv);
+                    itemLink.appendChild(itemDiv);
+                    searchResults.appendChild(itemLink);
+                });
+            } else {
+                searchResults.innerHTML = '<p style="text-align:center; color:#888;">Tidak ada hasil ditemukan.</p>';
+            }
+        }
+    });
+});
+</script>
+
+
+</body>
+</html>
