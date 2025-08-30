@@ -1077,7 +1077,7 @@
                 overlay.addEventListener('click', (e) => {
                     // Cek apakah target klik BUKAN tombol-tombol di dalamnya
                     if (e.target.tagName.toLowerCase() !== 'button' && e.target.tagName.toLowerCase() !== 'i' && !e.target.closest('.more-options-menu')) {
-                        window.location.href = `second.htmlp?src=${encodeURIComponent(image.src)}`;
+                        window.location.href = `second.html?src=${encodeURIComponent(image.src)}`;
                     }
                 });
                 
